@@ -1,0 +1,10 @@
+# libs
+build
+.vs
+dsp/x64
+synth2/x64
+tests/x64
+
+libs/imgui/.github
+libs/imgui/docs
+libs/imgui/examples

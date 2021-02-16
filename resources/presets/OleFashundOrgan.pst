@@ -1,0 +1,91 @@
+{
+    "comp": {
+        "attack": 1.0,
+        "autoMakeupGain": false,
+        "enabled": false,
+        "makeupGain": 0.0,
+        "ratio": 1.0,
+        "release": 100.0,
+        "threshold": 0.0
+    },
+    "env": {
+        "attack": 0.2308600115756132,
+        "decay": 0.016690001326790105,
+        "release": 0.06207000264299101,
+        "sustain": 1.0
+    },
+    "filter": [
+        {
+            "cutoff": 0.04622176881820436,
+            "enabled": false,
+            "order": 2,
+            "resonance": 0.0,
+            "type": 0
+        },
+        {
+            "cutoff": 0.49320905966553286,
+            "enabled": false,
+            "order": 4,
+            "resonance": 0.3593000030517578,
+            "type": 1
+        }
+    ],
+    "fx": [
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        }
+    ],
+    "lfo": {
+        "amplitude": 0.0,
+        "centOffset": 0,
+        "enabled": false,
+        "func": 0,
+        "harmonics": 1,
+        "noteOffset": 0,
+        "phase": 0.0
+    },
+    "master_dB": 0.0,
+    "osc": [
+        {
+            "amplitude": 0.06576578835685916,
+            "centOffset": 0,
+            "enabled": true,
+            "func": 2,
+            "harmonics": 4,
+            "noteOffset": 0,
+            "phase": 0.0
+        },
+        {
+            "amplitude": 0.46827394314727716,
+            "centOffset": 0,
+            "enabled": true,
+            "func": 1,
+            "harmonics": 6,
+            "noteOffset": -12,
+            "phase": 0.0
+        },
+        {
+            "amplitude": 0.0246320235749777,
+            "centOffset": 0,
+            "enabled": true,
+            "func": 3,
+            "harmonics": 8,
+            "noteOffset": 12,
+            "phase": 0.0
+        }
+    ],
+    "title": "OleFashundOrgan"
+}

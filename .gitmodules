@@ -1,0 +1,11 @@
+[submodule "libs/dirent"]
+	path = libs/dirent
+	url = https://github.com/tronkko/dirent
+[submodule "libs/imgui"]
+	path = libs/imgui
+	url = https://github.com/ocornut/imgui
+	branch = docking
+[submodule "libs/imgui_filedialog"]
+	path = libs/imgui_filedialog
+	url = https://github.com/aiekick/ImGuiFileDialog
+	branch = Lib_Only

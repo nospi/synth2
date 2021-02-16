@@ -1,0 +1,145 @@
+{
+    "comp": {
+        "attack": 10.0,
+        "autoMakeupGain": false,
+        "enabled": false,
+        "makeupGain": 0.0,
+        "ratio": 1.0,
+        "release": 100.0,
+        "threshold": 0.0
+    },
+    "env": {
+        "attack": 0.03,
+        "decay": 0.03,
+        "release": 0.1,
+        "sustain": 1.0
+    },
+    "filter": [
+        {
+            "cutoff": 0.99,
+            "enabled": false,
+            "order": 3,
+            "resonance": 0.0,
+            "type": 1
+        },
+        {
+            "cutoff": 0.99,
+            "enabled": false,
+            "order": 3,
+            "resonance": 0.0,
+            "type": 1
+        }
+    ],
+    "fx": [
+        {
+            "params": {
+                "feedback": 0.97,
+                "hpf": {
+                    "cutoff": 0.013545125325520834,
+                    "enabled": true,
+                    "order": 4,
+                    "resonance": 0.1,
+                    "type": 0
+                },
+                "lpf": {
+                    "cutoff": 0.99,
+                    "enabled": true,
+                    "order": 4,
+                    "resonance": 0.05,
+                    "type": 1
+                },
+                "mix": 0.4931999969482422,
+                "time": 0.22789999389648438
+            },
+            "unit": "Mono Delay"
+        },
+        {
+            "params": {
+                "feedback": 0.97,
+                "hpf": {
+                    "cutoff": 0.01009614490327381,
+                    "enabled": true,
+                    "order": 4,
+                    "resonance": 0.1,
+                    "type": 0
+                },
+                "lpf": {
+                    "cutoff": 0.626161467191043,
+                    "enabled": true,
+                    "order": 4,
+                    "resonance": 0.05,
+                    "type": 1
+                },
+                "mix": 0.36200000762939455,
+                "time": 1.8916500244140626
+            },
+            "unit": "Mono Delay"
+        },
+        {
+            "params": {
+                "feedback": 0.7556999969482422,
+                "hpf": {
+                    "cutoff": 0.007525169735863095,
+                    "enabled": true,
+                    "order": 4,
+                    "resonance": 0.1,
+                    "type": 0
+                },
+                "lpf": {
+                    "cutoff": 0.99,
+                    "enabled": true,
+                    "order": 4,
+                    "resonance": 0.05,
+                    "type": 1
+                },
+                "mix": 0.11310000419616699,
+                "time": 0.32604998779296873
+            },
+            "unit": "Mono Delay"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        }
+    ],
+    "lfo": {
+        "amplitude": 0.0,
+        "centOffset": 0,
+        "enabled": false,
+        "func": 0,
+        "harmonics": 1,
+        "noteOffset": 0,
+        "phase": 0.0
+    },
+    "master_dB": 0.0,
+    "osc": [
+        {
+            "amplitude": 1.0,
+            "centOffset": 0,
+            "enabled": true,
+            "func": 0,
+            "harmonics": 4,
+            "noteOffset": 0,
+            "phase": 0.0
+        },
+        {
+            "amplitude": 1.0,
+            "centOffset": 0,
+            "enabled": false,
+            "func": 0,
+            "harmonics": 4,
+            "noteOffset": 0,
+            "phase": 0.0
+        },
+        {
+            "amplitude": 1.0,
+            "centOffset": 0,
+            "enabled": false,
+            "func": 0,
+            "harmonics": 4,
+            "noteOffset": 0,
+            "phase": 0.0
+        }
+    ],
+    "title": "DelayTest"
+}

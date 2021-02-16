@@ -1,0 +1,90 @@
+{
+    "comp": {
+        "attack": 10.0,
+        "autoMakeupGain": false,
+        "enabled": false,
+        "ratio": 1.0,
+        "release": 100.0,
+        "threshold": 0.0
+    },
+    "env": {
+        "attack": 0.5174600465506884,
+        "decay": 0.023180001406166717,
+        "release": 0.022320000754967317,
+        "sustain": 0.0
+    },
+    "filter": [
+        {
+            "cutoff": 0.4938217474489796,
+            "enabled": true,
+            "order": 2,
+            "resonance": 0.0,
+            "type": 1
+        },
+        {
+            "cutoff": 0.99,
+            "enabled": true,
+            "order": 4,
+            "resonance": 0.0,
+            "type": 1
+        }
+    ],
+    "fx": [
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        }
+    ],
+    "lfo": {
+        "amplitude": 0.0,
+        "centOffset": 0,
+        "enabled": false,
+        "func": 0,
+        "harmonics": 1,
+        "noteOffset": 0,
+        "phase": 0.0
+    },
+    "master_dB": 0.0,
+    "osc": [
+        {
+            "amplitude": 1.0,
+            "centOffset": 0,
+            "enabled": true,
+            "func": 2,
+            "harmonics": 8,
+            "noteOffset": -24,
+            "phase": 0.0
+        },
+        {
+            "amplitude": 1.0,
+            "centOffset": -10,
+            "enabled": true,
+            "func": 3,
+            "harmonics": 4,
+            "noteOffset": 12,
+            "phase": 0.12999999523162842
+        },
+        {
+            "amplitude": 1.0,
+            "centOffset": 0,
+            "enabled": false,
+            "func": 0,
+            "harmonics": 4,
+            "noteOffset": 0,
+            "phase": 0.0
+        }
+    ],
+    "title": "Reverse"
+}

@@ -1,0 +1,163 @@
+{
+    "comp": {
+        "attack": 1.0,
+        "autoMakeupGain": false,
+        "enabled": false,
+        "makeupGain": 0.0,
+        "ratio": 1.0,
+        "release": 100.0,
+        "threshold": 0.0
+    },
+    "env": {
+        "attack": 0.2308600115756132,
+        "decay": 0.016690001326790105,
+        "release": 0.06207000264299101,
+        "sustain": 1.0
+    },
+    "filter": [
+        {
+            "cutoff": 0.04622176881820436,
+            "enabled": false,
+            "order": 2,
+            "resonance": 0.0,
+            "type": 0
+        },
+        {
+            "cutoff": 0.5957904620181406,
+            "enabled": false,
+            "order": 4,
+            "resonance": 0.1840999984741211,
+            "type": 1
+        }
+    ],
+    "fx": [
+        {
+            "params": {
+                "feedback": 0.7737999725341798,
+                "hpf": {
+                    "cutoff": 0.029080724737811793,
+                    "enabled": true,
+                    "order": 8,
+                    "resonance": 0.2,
+                    "type": 0
+                },
+                "lpf": {
+                    "cutoff": 0.44547348887471655,
+                    "enabled": true,
+                    "order": 4,
+                    "resonance": 0.1,
+                    "type": 1
+                },
+                "mix": 0.25340000152587894,
+                "time": 0.5
+            },
+            "unit": "Mono Delay"
+        },
+        {
+            "params": {
+                "feedback": 0.97,
+                "hpf": {
+                    "cutoff": 0.0020054422322314342,
+                    "enabled": true,
+                    "order": 8,
+                    "resonance": 0.2,
+                    "type": 0
+                },
+                "lpf": {
+                    "cutoff": 0.1901782392644558,
+                    "enabled": true,
+                    "order": 4,
+                    "resonance": 0.1,
+                    "type": 1
+                },
+                "mix": 0.46610000610351565,
+                "time": 0.05
+            },
+            "unit": "Mono Delay"
+        },
+        {
+            "params": {
+                "feedback": 0.8597000122070313,
+                "hpf": {
+                    "cutoff": 0.05390385288229875,
+                    "enabled": true,
+                    "order": 8,
+                    "resonance": 0.2,
+                    "type": 0
+                },
+                "lpf": {
+                    "cutoff": 0.8434661989795919,
+                    "enabled": true,
+                    "order": 4,
+                    "resonance": 0.1,
+                    "type": 1
+                },
+                "mix": 0.17649999618530274,
+                "time": 4.0
+            },
+            "unit": "Mono Delay"
+        },
+        {
+            "params": {
+                "feedback": 0.97,
+                "hpf": {
+                    "cutoff": 0.0030263040071171698,
+                    "enabled": true,
+                    "order": 8,
+                    "resonance": 0.2,
+                    "type": 0
+                },
+                "lpf": {
+                    "cutoff": 0.17466031790320294,
+                    "enabled": true,
+                    "order": 4,
+                    "resonance": 0.1,
+                    "type": 1
+                },
+                "mix": 0.06789999961853027,
+                "time": 2.888419921875
+            },
+            "unit": "Mono Delay"
+        }
+    ],
+    "lfo": {
+        "amplitude": 0.0,
+        "centOffset": 0,
+        "enabled": false,
+        "func": 0,
+        "harmonics": 1,
+        "noteOffset": 0,
+        "phase": 0.0
+    },
+    "master_dB": 0.0,
+    "osc": [
+        {
+            "amplitude": 0.06576578835685916,
+            "centOffset": 0,
+            "enabled": true,
+            "func": 2,
+            "harmonics": 4,
+            "noteOffset": 0,
+            "phase": 0.0
+        },
+        {
+            "amplitude": 0.46827394314727716,
+            "centOffset": 0,
+            "enabled": true,
+            "func": 1,
+            "harmonics": 6,
+            "noteOffset": -12,
+            "phase": 0.0
+        },
+        {
+            "amplitude": 0.0246320235749777,
+            "centOffset": 0,
+            "enabled": true,
+            "func": 3,
+            "harmonics": 8,
+            "noteOffset": 12,
+            "phase": 0.0
+        }
+    ],
+    "title": "New Fangled Distant Spacious Ohmygorgan"
+}

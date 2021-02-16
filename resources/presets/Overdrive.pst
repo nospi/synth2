@@ -1,0 +1,91 @@
+{
+    "comp": {
+        "attack": 0.10000000149011612,
+        "autoMakeupGain": false,
+        "enabled": true,
+        "makeupGain": 4.989999771118164,
+        "ratio": 0.05924170910649413,
+        "release": 0.10000000149011612,
+        "threshold": -0.8799999952316284
+    },
+    "env": {
+        "attack": 0.014170000749332834,
+        "decay": 0.07221000251426357,
+        "release": 0.09063000155811185,
+        "sustain": 0.9999999776482582
+    },
+    "filter": [
+        {
+            "cutoff": 0.5280512595663265,
+            "enabled": true,
+            "order": 4,
+            "resonance": 0.31059999465942384,
+            "type": 1
+        },
+        {
+            "cutoff": 0.023661223604024943,
+            "enabled": true,
+            "order": 4,
+            "resonance": 0.0,
+            "type": 0
+        }
+    ],
+    "fx": [
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        }
+    ],
+    "lfo": {
+        "amplitude": 0.0,
+        "centOffset": 0,
+        "enabled": false,
+        "func": 0,
+        "harmonics": 1,
+        "noteOffset": 0,
+        "phase": 0.0
+    },
+    "master_dB": -2.7899999618530273,
+    "osc": [
+        {
+            "amplitude": 0.5977230591267468,
+            "centOffset": 0,
+            "enabled": true,
+            "func": 2,
+            "harmonics": 10,
+            "noteOffset": -24,
+            "phase": -0.5199999809265137
+        },
+        {
+            "amplitude": 0.4698941117007598,
+            "centOffset": 4,
+            "enabled": true,
+            "func": 2,
+            "harmonics": 10,
+            "noteOffset": -12,
+            "phase": 0.5
+        },
+        {
+            "amplitude": 1.0,
+            "centOffset": 0,
+            "enabled": false,
+            "func": 0,
+            "harmonics": 4,
+            "noteOffset": 0,
+            "phase": 0.0
+        }
+    ],
+    "title": "Overdrive!!"
+}

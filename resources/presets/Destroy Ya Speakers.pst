@@ -1,0 +1,139 @@
+{
+    "comp": {
+        "attack": 0.10000000149011612,
+        "autoMakeupGain": false,
+        "enabled": true,
+        "makeupGain": 9.5,
+        "ratio": 0.05,
+        "release": 0.10000000149011612,
+        "threshold": -4.340000152587891
+    },
+    "env": {
+        "attack": 0.06207000264299101,
+        "decay": 0.43694002319494274,
+        "release": 0.47100002237129956,
+        "sustain": 0.5565999860331416
+    },
+    "filter": [
+        {
+            "cutoff": 0.5106498901643991,
+            "enabled": true,
+            "order": 6,
+            "resonance": 0.5447000122070312,
+            "type": 1
+        },
+        {
+            "cutoff": 0.023661223604024943,
+            "enabled": true,
+            "order": 4,
+            "resonance": 0.0,
+            "type": 0
+        }
+    ],
+    "fx": [
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": [
+                0.34798001098632814,
+                0.0,
+                0.5791999816894532,
+                [
+                    "hpf",
+                    {
+                        "cutoff": 0.018140589569160998,
+                        "enabled": true,
+                        "order": 4,
+                        "resonance": 0.1,
+                        "type": 0
+                    }
+                ],
+                [
+                    "lpf",
+                    {
+                        "cutoff": 0.4216968714569161,
+                        "enabled": true,
+                        "order": 4,
+                        "resonance": 0.05,
+                        "type": 1
+                    }
+                ]
+            ],
+            "unit": "Mono Delay"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": [
+                0.25960000610351563,
+                0.97,
+                0.44340000152587894,
+                [
+                    "hpf",
+                    {
+                        "cutoff": 0.0038281395321800595,
+                        "enabled": true,
+                        "order": 4,
+                        "resonance": 0.1,
+                        "type": 0
+                    }
+                ],
+                [
+                    "lpf",
+                    {
+                        "cutoff": 0.05551143862492914,
+                        "enabled": true,
+                        "order": 4,
+                        "resonance": 0.05,
+                        "type": 1
+                    }
+                ]
+            ],
+            "unit": "Mono Delay"
+        }
+    ],
+    "lfo": {
+        "amplitude": 0.0,
+        "centOffset": 0,
+        "enabled": false,
+        "func": 0,
+        "harmonics": 1,
+        "noteOffset": 0,
+        "phase": 0.0
+    },
+    "master_dB": -2.7899999618530273,
+    "osc": [
+        {
+            "amplitude": 0.5977230591267468,
+            "centOffset": 0,
+            "enabled": true,
+            "func": 2,
+            "harmonics": 10,
+            "noteOffset": -24,
+            "phase": 0.0
+        },
+        {
+            "amplitude": 0.564936972331194,
+            "centOffset": 0,
+            "enabled": true,
+            "func": 2,
+            "harmonics": 4,
+            "noteOffset": -12,
+            "phase": 0.46000000834465027
+        },
+        {
+            "amplitude": 0.44719816357286707,
+            "centOffset": 0,
+            "enabled": false,
+            "func": 0,
+            "harmonics": 4,
+            "noteOffset": 0,
+            "phase": 0.0
+        }
+    ],
+    "title": "Destroy Ya Speakers"
+}
