@@ -105,7 +105,7 @@ Ideally the fx unit will be configurable between insert and send.
 OSCS -- ENV -- PRE-DYN -- (DYN) -- POST-DYN -- (FX) -- POST-FX -- LIMITER -- MASTER FADER
 ```
 
-# [License (OLC-3)](https://github.com/nospi/synth2/LICENSE.md)
+# [License (OLC-3)](https://github.com/nospi/synth2/blob/main/LICENSE.md)
 Copyright 2018, 2019, 2020 OneLoneCoder.com
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
