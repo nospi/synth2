@@ -2,19 +2,23 @@
 
 A basic additive synthesiser in C++ with accompanying DSP library. 
 
-This begain as an extension of [olcSynthVisualizer](https://github.com/nospi/olcsynthvisualizer) 
-but quickly outgrew the confines, and exemplifies what I hope is a more structured project.
-
-Despite this being a relatively small application; I've attempted to implement a scalable structure 
-that allows this DSP library and synth app to be extended upon as necessary.
-
 Using [olcPixelGameEngine](https://github.com/OneLoneCoder/olcPixelGameEngine), 
-olcPGEX_Sound (modified), [Dear ImGui](https://github.com/ocornut/imgui) and
-[dandistine](https://github.com/dandistine)'s [olcPGE Dear ImGui backend implementation](https://github.com/dandistine/olcPGEDearImGui).
+olcPGEX_Sound (modified), [Dear ImGui](https://github.com/ocornut/imgui) and 
+[olcPGE Dear ImGui backend implementation](https://github.com/dandistine/olcPGEDearImGui).
 
-## Install
-All dependencies are included directly or as submodules. To clone all required files simply use the `--recurse-submodules` flag when cloning this repository:
+MIDI support now included with [RtMidi](https://github.com/thestk/rtmidi).
+
+## Compiling
+All dependencies are included directly or as git submodules. To clone all required files 
+simply use the `--recurse-submodules` flag when cloning this repository:
+
 `git clone --recurse-submodules https://github.com/nospi/synth2`
+
+The project is built with Visual Studio 2019 - no alternative build scripts are attached 
+but I'd be open to pull requests for additional environments.
+
+## Key Map
+![keymap](https://user-images.githubusercontent.com/19985451/108187493-a2620a80-7162-11eb-96bb-2c6687261bbe.png)
 
 ## Current Features
 - 3 oscillators
@@ -26,34 +30,23 @@ All dependencies are included directly or as submodules. To clone all required f
 - 4 unit FX rack (currently running as inserts with a dry/wet mix)
 - Realtime waveform and FFT visualizers
 - Custom presets
-- QWERTY keyboard input (needs to be offset)
+- QWERTY *or* MIDI keyboard input
 - Configurable UI
 
-## Key Map
-```
-(QWERTY)
- S    F  G  H    K  L
-Z  X C  V  B  N M  ,  .
-=======================
-(NOTE)
- D#   F# G# A#   C# D#
-D  E F  G  A  B C  D  E
-```
-
-## FX Units
+### FX Units
 - Mono Delay
 
 ## Upcoming Plans
-### Features
+#### Proposed Features
+- Parameter Smoothing
 - Concurrent multi-channel support
-- MIDI Input
 - Efficient wave function approximations
 - LFO
 - Wave functions:
     - Noise
     - PWM
 
-### Proposed FX Units
+#### Proposed FX Units
 - Algorithmic Reverb(s)
 - Overdrive
 - Fuzz
@@ -72,9 +65,11 @@ For convenience, all dependencies are included as submodules under `$(SolutionDi
 - [ImGuiFileDialog](https://github.com/aiekick/ImGuiFileDialog/tree/Lib_Only)
 - [json.hpp](https://github.com/nlohmann/json/releases/tag/v3.9.1)
 - [dirent.h](https://github.com/tronkko/dirent)
+- [rtmidi](https://github.com/thestk/rtmidi)
 
-# Signal Path
-### Current
+## Signal Path
+
+#### Current
 ```
 OSC 1 --+
         |
@@ -83,7 +78,7 @@ OSC 2 --+-- ADSR ENV -- FILTER 1 -- FILTER 2 -- COMPRESSOR -- FX 1 -- FX 2 -- FX
 OSC 3 --+
 ```
 
-### Proposed
+#### Proposed
 Modify FX from insert routing to send routing.
 ```
                                                              +- FX 1 -+
@@ -96,16 +91,16 @@ OSC 3 --+                                                    |        |
 ```
 Ideally the fx unit will be configurable between insert and send.
 
-### Pre/Post Settings
+#### Pre/Post Settings
 - Filters should be configurable as pre/post dynamics; and pre/post FX
 - FX units should be configurable as pre/post dynamics
 
-### Generalised Stages
+#### Generalised Stages
 ```
 OSCS -- ENV -- PRE-DYN -- (DYN) -- POST-DYN -- (FX) -- POST-FX -- LIMITER -- MASTER FADER
 ```
 
-# [License (OLC-3)](https://github.com/nospi/synth2/blob/main/LICENSE.md)
+## [License (OLC-3)](https://github.com/nospi/synth2/blob/main/LICENSE.md)
 Copyright 2018, 2019, 2020 OneLoneCoder.com
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
