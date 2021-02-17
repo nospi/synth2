@@ -45,7 +45,7 @@ private:
 	olc::imgui::PGE_ImGUI pge_imgui;
 	std::mutex muxNotes;
 	std::vector<note> activeNotes;
-	std::vector<olc::Key> vKeys = { olc::Z, olc::S, olc::X, olc::C, olc::F, olc::V, olc::G, olc::B, olc::H, olc::N, olc::M, olc::K, olc::COMMA, olc::L, olc::PERIOD };
+	std::vector<olc::Key> vKeys = { olc::Z, olc::S, olc::X, olc::D, olc::C, olc::V, olc::G, olc::B, olc::H, olc::N, olc::J, olc::M, olc::COMMA, olc::L, olc::PERIOD };
 
 public:
 	synth2(parameters& config);

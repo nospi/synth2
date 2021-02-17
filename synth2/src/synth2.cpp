@@ -58,7 +58,7 @@ bool synth2::initialiseAudio(unsigned sampleRate, unsigned channels, unsigned bl
 void synth2::processQwertyInput()
 {
 	double timeNow = olc::SOUND::GetTime();
-	int noteOffset = 64;
+	int noteOffset = 60;
 
 	// check key states to add/remove notes
 	for (int k = 0; k < vKeys.size(); k++)
