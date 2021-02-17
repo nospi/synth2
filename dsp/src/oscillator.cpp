@@ -44,7 +44,7 @@ namespace dsp
 	double oscillator::run(const note& n, const double& time)
 	{
 		double frequency = scale::noteToHz(n.id, noteOffset, centOffset);
-		return wavegen::Generate(func, frequency, time + phase * 1.0 / frequency, std::min(1.0, amplitude), harmonics);
+		return wavegen::Generate(func, frequency, time + phase * 1.0 / frequency, std::min(1.0, amplitude) * n.velocity, harmonics);
 	}
 
 	json oscillator::serializeParams() const

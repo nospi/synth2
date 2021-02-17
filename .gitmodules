@@ -9,3 +9,11 @@
 	path = libs/imgui_filedialog
 	url = https://github.com/aiekick/ImGuiFileDialog
 	branch = Lib_Only
+[submodule "libs/--force"]
+	path = libs/--force
+	url = https://github.com/thestk/rtmidi
+	branch = releases
+[submodule "libs/rtmidi"]
+	path = libs/rtmidi
+	url = https://github.com/thestk/rtmidi
+	branch = releases

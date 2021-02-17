@@ -1,5 +1,6 @@
 #include "synth2.h"
 #include "preset.h"
+#include <tuple>
 
 typedef bool(*lambda)(const note& item);
 template<class T>
@@ -24,8 +25,9 @@ synth2::synth2(synth2::parameters& config) :
 
 bool synth2::OnUserCreate()
 {
-	gui::initialise();
 	initialiseAudio(params.sampleRate, params.channels, params.blocks, params.bufferSize);
+	if (params.midiEnabled) initialiseMidi();
+	gui::initialise();
 	inst.deserializeParams(CreateDefaultPreset());
 	return true;
 }
@@ -38,7 +40,7 @@ bool synth2::OnUserDestroy()
 
 bool synth2::OnUserUpdate(float fElapsedTime)
 {
-	updateAudio();
+	if (!params.midiEnabled) processQwertyInput();
 	gui::process(this);
 	return !(GetKey(olc::ESCAPE).bPressed);
 }
@@ -53,7 +55,7 @@ bool synth2::initialiseAudio(unsigned sampleRate, unsigned channels, unsigned bl
 	return false;
 }
 
-void synth2::updateAudio()
+void synth2::processQwertyInput()
 {
 	double timeNow = olc::SOUND::GetTime();
 	int noteOffset = 64;
@@ -92,6 +94,81 @@ void synth2::updateAudio()
 					n.off = timeNow;
 
 		muxNotes.unlock();
+	}
+}
+
+void handleMidiMessage(double timestamp, std::vector<unsigned char>* message, void* d)
+{
+	synth2::noteData* data = (synth2::noteData*)d;
+	int status = message->at(0);
+
+	/*
+	 *	MIDI messages are composed of 3 bytes: the first being the status,
+	 *	and the following two containing contextual data.
+	 *
+	 *	Status 0x90 == NoteOn;	Status 0x80 == NoteOff;
+	 *
+     *	For both of these messages, the data bytes correspond to the note id
+	 *	and velocity, respectively. Some devices do not provide NoteOff messages, 
+	 *	instead they provide a NoteOn message with a velocity of 0.
+	*/
+	enum { NOTE_OFF = 0x80, NOTE_ON = 0x90 };
+
+	if (status == NOTE_OFF || status == NOTE_ON)
+	{
+		short noteId = message->at(1);
+		double velocity = message->at(2) / 127.0;
+		int noteOffset = 64;
+
+		// note message
+		data->mutex->lock();
+		auto noteFound = std::find_if(data->activeNotes->begin(), data->activeNotes->end(), [noteId](const note& item) { return item.id == noteId; });
+
+		if (noteFound == data->activeNotes->end())
+		{
+			// note is not in vector
+			if (status == NOTE_ON && velocity > 0.0)
+			{
+				data->activeNotes->emplace_back(noteId, noteOffset, olc::SOUND::GetTime(), velocity, data->voice);
+			}
+		}
+		else
+		{
+			// note is already in vector
+			if (status == NOTE_OFF || velocity == 0.0)
+			{
+				// key released
+				noteFound->off = olc::SOUND::GetTime();
+			}
+			else
+			{
+				// key pressed again
+	 			noteFound->on = olc::SOUND::GetTime();
+				noteFound->active = true;
+			}
+		}
+
+		data->mutex->unlock();
+	}
+}
+
+bool synth2::initialiseMidi()
+{
+	// midi thread needs access the notes vector, mutex and instrument
+	static const noteData data = { &muxNotes, &activeNotes, &inst };
+	static RtMidiIn midiIn;
+
+	try {
+		midiIn.setCallback(&handleMidiMessage, (void*)&data);
+		midiIn.openPort(params.midiPort);
+		params.midiEnabled = true;
+		return true;
+	}
+	catch (RtMidiError& error)
+	{
+		params.midiEnabled = false;
+		error.printMessage();
+		return false;
 	}
 }
 

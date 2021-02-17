@@ -7,6 +7,7 @@
 #include <olcPixelGameEngine.h>
 #include <olcPGEX_Sound.h>
 #include <dsp.h>
+#include <RtMidi.h>
 
 #include "ringbuf.h"
 #include "gui.h"
@@ -23,6 +24,15 @@ public:
 		unsigned blocks = 8U;
 		unsigned bufferSize = 512U;
 		unsigned deviceId = 0U;
+		bool midiEnabled = true;
+		unsigned midiPort = 0U;
+	};
+
+	struct noteData
+	{
+		std::mutex* mutex = nullptr;
+		std::vector<dsp::note>* activeNotes = nullptr;
+		instrument* voice = nullptr;
 	};
 
 public:
@@ -46,8 +56,11 @@ public:
 	bool OnUserUpdate(float) override;
 
 private:
+	bool initialiseMidi();
 	bool initialiseAudio(unsigned sampleRate, unsigned channels, unsigned blocks, unsigned bufferSize);
-	void updateAudio();
+	
+	// handle keyboard input if MIDI is not in use
+	void processQwertyInput();
 	
 	// per channel audio process hook
 	double makeNoise(int channel, double globalTime, double timeStep);
