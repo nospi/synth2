@@ -22,6 +22,9 @@
     <Filter Include="Source Files\rtmidi">
       <UniqueIdentifier>{f0ef2903-0ca1-4d03-a5c3-a8de5d1d3cc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Text Files">
+      <UniqueIdentifier>{1c8b9758-6ab0-459c-a65c-ae5964b693d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -125,5 +128,13 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\LICENSE.md">
+      <Filter>Text Files</Filter>
+    </None>
+    <None Include="..\README.md">
+      <Filter>Text Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
