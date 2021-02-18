@@ -32,6 +32,7 @@ but I'd be open to pull requests for additional environments.
 - Custom presets
 - QWERTY *or* MIDI keyboard input
 - Configurable UI
+- Keyboard visualizer
 
 ### FX Units
 - Mono Delay

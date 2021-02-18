@@ -15,6 +15,7 @@
 #include "ringbuf.h"
 #include "visualizer.h"
 #include "instrument.h"
+#include "keyboard.h"
 
 class synth2;
 
@@ -27,6 +28,7 @@ namespace gui
 	namespace panel
 	{
 		bool visualizer(const char* label, const ringbuffer<double>& vis_waveform, const visualizer_fft& vis_fft);
+		bool keyboard(const char* label, ::keyboard* board = nullptr);
 		bool compressor(const char* label, dsp::compressor* comp = nullptr);
 		bool resonant_filter(const char* label, dsp::resonant_filter* filt);
 		bool oscillator(const char* label, dsp::oscillator* osc = nullptr);

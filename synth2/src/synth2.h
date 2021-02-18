@@ -12,6 +12,7 @@
 #include "ringbuf.h"
 #include "gui.h"
 #include "instrument.h"
+#include "keyboard.h"
 
 class synth2 : public olc::PixelGameEngine
 {
@@ -40,6 +41,7 @@ public:
 	instrument inst;
 	visualizer vis_waveform;
 	visualizer_fft vis_fft;
+	keyboard keyboard;
 
 private:
 	olc::imgui::PGE_ImGUI pge_imgui;

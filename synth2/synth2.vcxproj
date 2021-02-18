@@ -116,6 +116,7 @@
     <ClCompile Include="..\libs\rtmidi\RtMidi.cpp" />
     <ClCompile Include="src\gui.cpp" />
     <ClCompile Include="src\instrument.cpp" />
+    <ClCompile Include="src\keyboard.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\preset.cpp" />
     <ClCompile Include="src\ringbuf.cpp" />
@@ -136,6 +137,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="src\gui.h" />
     <ClInclude Include="src\instrument.h" />
+    <ClInclude Include="src\keyboard.h" />
     <ClInclude Include="src\preset.h" />
     <ClInclude Include="src\ringbuf.h" />
     <ClInclude Include="src\synth2.h" />

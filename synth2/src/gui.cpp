@@ -83,6 +83,7 @@ bool gui::process(synth2* app)
 	gui::panel::resonant_filter("Filter I", &app->inst.filter[0]);
 	gui::panel::resonant_filter("Filter II", &app->inst.filter[1]);
 	gui::panel::visualizer("Visualizer", app->vis_waveform, app->vis_fft);
+	gui::panel::keyboard("Keyboard", &app->keyboard);
 
 	for (int i = 0; i < 4; i++)
 		gui::fx::fx_unit(&app->inst, i);
@@ -120,6 +121,79 @@ bool gui::panel::visualizer(const char* label, const ringbuffer<double>& vis_wav
 
 	ImGui::End();
 	return false;
+}
+
+bool gui::panel::keyboard(const char* label, ::keyboard* board)
+{
+	if (!ImGui::Begin(label))
+	{
+		ImGui::End();
+		return false;
+	}
+	
+	ImDrawList* drawList = ImGui::GetWindowDrawList();
+	ImVec2 region = ImGui::GetWindowSize();
+	ImVec2 pos = ImGui::GetWindowPos();
+
+	ImVec2 keysizeWhite = { region.x / (float)board->getWhiteKeys().size(), region.y };
+	ImVec2 keysizeBlack = { keysizeWhite.x * 0.7f, keysizeWhite.y * 0.6f };
+
+	auto vKeysWhite = board->getWhiteKeys();
+	auto vKeysBlack = board->getBlackKeys();
+
+	// white keys
+	for (int i = 0; i < vKeysWhite.size(); i++)
+	{
+		// bg
+		ImU32 bg = 0xFF000000;
+		//if (board->key_is_active(vKeysWhite[i]))
+		//	bg = 0xFFFFFFFF;
+		ImVec2 tl = { pos.x + i * keysizeWhite.x, pos.y };
+		ImVec2 br = { tl.x + keysizeWhite.x, tl.y + keysizeWhite.y };
+		drawList->AddRectFilled(tl, br, bg);
+
+		// key
+		tl.x += 1.0f;
+		br.x -= 1.0f;
+		br.y -= 1.0f;
+		double velocity = 1.0;
+		ImU32 col = 0xFFEEEEEE;
+		if (board->key_is_active(vKeysWhite[i], &velocity))
+		{
+			// TODO - fix
+			// convert velocity (0-1.0) back to 8-bit value
+			//ImU32 vel = (ImU32)(velocity * 127.0) * 2;
+			//col -= (vel << 16) + (vel << 8);
+			col = 0xFF0000FF;
+		}
+		drawList->AddRectFilled(tl, br, col);
+	}
+
+	// black keys
+	for (int i = 0; i < vKeysBlack.size(); i++)
+	{
+		int keyId = vKeysBlack.at(i);
+
+		//bg
+		ImU32 bg = 0xFF000000;
+		//if (board->key_is_active(vKeysBlack[i]))
+		//	bg = 0xFF0000FF;
+		
+		int prevKeyIndex = board->getWhiteKeyIndex(keyId - 1);
+		ImVec2 tl = { pos.x + prevKeyIndex * keysizeWhite.x + keysizeWhite.x - keysizeBlack.x * 0.5f, pos.y };
+		ImVec2 br = { tl.x + keysizeBlack.x, tl.y + keysizeBlack.y };
+		drawList->AddRectFilled(tl, br, bg);
+
+		// key
+		tl.x += 1.0f;
+		br.x -= 1.0f;
+		br.y -= 1.0f;
+		ImU32 col = board->key_is_active(vKeysBlack[i]) ? 0xFF1000FF : 0xFF050505;
+		drawList->AddRectFilled(tl, br, col);
+	}
+
+	ImGui::End();
+	return true;
 }
 
 

@@ -21,6 +21,7 @@ synth2::synth2(synth2::parameters& config) :
 	vis_fft(2048)
 {
 	sAppName = "synth2";
+	keyboard = ::keyboard(&muxNotes, &activeNotes);
 }
 
 bool synth2::OnUserCreate()

@@ -75,6 +75,9 @@
     <ClCompile Include="..\libs\rtmidi\RtMidi.cpp">
       <Filter>Source Files\rtmidi</Filter>
     </ClCompile>
+    <ClCompile Include="src\keyboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\synth2.h">
@@ -126,6 +129,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\keyboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
