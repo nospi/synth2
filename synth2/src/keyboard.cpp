@@ -10,7 +10,7 @@ bool keyboard::key_is_black(int keyId) const
 	return (keyId + keyId / 5 + keyId / 10) % 2;
 }
 
-bool keyboard::key_is_active(int keyId, double* velocity) const
+bool keyboard::key_is_active(int keyId, double* velocity)
 {
 	auto keyFound = std::find_if(pActiveNotes->begin(), pActiveNotes->end(), [&keyId](const dsp::note& n) { return n.id == keyId; });
 	if (keyFound != pActiveNotes->end())
@@ -22,7 +22,7 @@ bool keyboard::key_is_active(int keyId, double* velocity) const
 	return false;
 }
 
-std::vector<int> keyboard::getWhiteKeys() const
+std::vector<int> keyboard::getWhiteKeys()
 {
 	static std::vector<int> keys;
 	if (keys.size() < 1)
@@ -32,7 +32,7 @@ std::vector<int> keyboard::getWhiteKeys() const
 	return keys;
 }
 
-std::vector<int> keyboard::getBlackKeys() const
+std::vector<int> keyboard::getBlackKeys()
 {
 	static std::vector<int> keys;
 	if (keys.size() < 1)
@@ -42,7 +42,7 @@ std::vector<int> keyboard::getBlackKeys() const
 	return keys;
 }
 
-int keyboard::getWhiteKeyIndex(const int& noteId) const
+int keyboard::getWhiteKeyIndex(const int& noteId)
 {
 	auto keys = getWhiteKeys();
 	for (int i = 0; i < keys.size(); i++)

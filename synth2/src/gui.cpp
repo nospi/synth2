@@ -145,26 +145,19 @@ bool gui::panel::keyboard(const char* label, ::keyboard* board)
 	for (int i = 0; i < vKeysWhite.size(); i++)
 	{
 		// bg
-		ImU32 bg = 0xFF000000;
-		//if (board->key_is_active(vKeysWhite[i]))
-		//	bg = 0xFFFFFFFF;
 		ImVec2 tl = { pos.x + i * keysizeWhite.x, pos.y };
 		ImVec2 br = { tl.x + keysizeWhite.x, tl.y + keysizeWhite.y };
-		drawList->AddRectFilled(tl, br, bg);
+		drawList->AddRectFilled(tl, br, 0xFF000000);
 
 		// key
-		tl.x += 1.0f;
-		br.x -= 1.0f;
-		br.y -= 1.0f;
-		double velocity = 1.0;
+		tl.x += 1.0f; br.x -= 1.0f; br.y -= 1.0f;
+		double velocity;
 		ImU32 col = 0xFFEEEEEE;
 		if (board->key_is_active(vKeysWhite[i], &velocity))
 		{
-			// TODO - fix
-			// convert velocity (0-1.0) back to 8-bit value
-			//ImU32 vel = (ImU32)(velocity * 127.0) * 2;
-			//col -= (vel << 16) + (vel << 8);
-			col = 0xFF0000FF;
+			// g and b should be inversely proportional to the note velocity
+			ImU32 gb = 200 - (ImU32)(velocity * 200.0);
+			col = (0xFF << 24) + (gb << 16) + (gb << 8) + 0xFF; // alpha, blue, green, red
 		}
 		drawList->AddRectFilled(tl, br, col);
 	}
@@ -175,20 +168,21 @@ bool gui::panel::keyboard(const char* label, ::keyboard* board)
 		int keyId = vKeysBlack.at(i);
 
 		//bg
-		ImU32 bg = 0xFF000000;
-		//if (board->key_is_active(vKeysBlack[i]))
-		//	bg = 0xFF0000FF;
-		
 		int prevKeyIndex = board->getWhiteKeyIndex(keyId - 1);
 		ImVec2 tl = { pos.x + prevKeyIndex * keysizeWhite.x + keysizeWhite.x - keysizeBlack.x * 0.5f, pos.y };
 		ImVec2 br = { tl.x + keysizeBlack.x, tl.y + keysizeBlack.y };
-		drawList->AddRectFilled(tl, br, bg);
+		drawList->AddRectFilled(tl, br, 0xFF000000);
 
 		// key
-		tl.x += 1.0f;
-		br.x -= 1.0f;
-		br.y -= 1.0f;
-		ImU32 col = board->key_is_active(vKeysBlack[i]) ? 0xFF1000FF : 0xFF050505;
+		tl.x += 1.0f; br.x -= 1.0f; br.y -= 1.0f;
+		double velocity;
+		ImU32 col = 0xFF050505;
+		if (board->key_is_active(vKeysBlack[i], &velocity))
+		{
+			// g and b 0, red proportional to velocity plus offset
+			ImU32 uVel = (ImU32)(velocity * 127.0) + (128 - 0x05);
+			col = (0xFF << 24) + uVel; // alpha, red
+		}
 		drawList->AddRectFilled(tl, br, col);
 	}
 

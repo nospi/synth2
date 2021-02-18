@@ -14,15 +14,15 @@ public:
 	virtual ~keyboard() = default;
 
 	bool key_is_black(int keyId) const;
-	bool key_is_active(int keyId, double* velocity = nullptr) const;
+	bool key_is_active(int keyId, double* velocity = nullptr);
 
 	int getFirstKeyId() const { return startOffset; }
 	int getLastKeyId() const { return startOffset + numKeys; }
 	int getKeyCount() const { return numKeys; }
 	
-	std::vector<int> getWhiteKeys() const;
-	std::vector<int> getBlackKeys() const;
-	int getWhiteKeyIndex(const int& noteId) const;
+	std::vector<int> getWhiteKeys();
+	std::vector<int> getBlackKeys();
+	int getWhiteKeyIndex(const int& noteId);
 
 private:
 	int numKeys = 88;
