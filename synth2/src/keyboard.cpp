@@ -17,7 +17,7 @@ bool keyboard::key_is_active(int keyId, double* velocity) const
 	{
 		if (velocity != nullptr)
 			*velocity = keyFound->velocity;
-		return keyFound->active;
+		return keyFound->active && keyFound->off < keyFound->on;
 	}
 	return false;
 }
