@@ -7,8 +7,12 @@ namespace dsp
 		velocity(0.6), channel(nullptr),
 		active(false), offset(0) {}
 
-	note::note(int id, int offset, double timeOn, double velocity, instrument_base* channel) :
+	note::note(int id, int offset, double timeOn, double velocity, instrument_base* channel, envelope_adsr* env) :
 		id(id), offset(offset), on(timeOn), off(0.0),
 		velocity(velocity), channel(channel),
-		active(true) {}
+		active(true)
+	{
+		if (env != nullptr)
+			this->env.deserializeParams(env->serializeParams());
+	}
 }

@@ -20,6 +20,7 @@
     <ClCompile Include="src\limiter.cpp" />
     <ClCompile Include="src\note.cpp" />
     <ClCompile Include="src\oscillator.cpp" />
+    <ClCompile Include="src\ramp.cpp" />
     <ClCompile Include="src\resonant_filter.cpp" />
     <ClCompile Include="src\util.cpp" />
   </ItemGroup>
@@ -35,6 +36,7 @@
     <ClInclude Include="include\limiter.h" />
     <ClInclude Include="include\note.h" />
     <ClInclude Include="include\oscillator.h" />
+    <ClInclude Include="include\ramp.h" />
     <ClInclude Include="include\resonant_filter.h" />
     <ClInclude Include="include\scale.h" />
     <ClInclude Include="include\util.h" />

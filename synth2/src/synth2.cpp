@@ -71,7 +71,7 @@ void synth2::processQwertyInput()
 		{
 			// note not found in vector
 			if (GetKey(vKeys[k]).bPressed)
-				activeNotes.emplace_back(k + noteOffset, noteOffset, timeNow, 1.0, &inst);
+				activeNotes.emplace_back(k + noteOffset, noteOffset, timeNow, 1.0, &inst, &inst.env);
 		}
 		else
 		{
@@ -130,7 +130,7 @@ void handleMidiMessage(double timestamp, std::vector<unsigned char>* message, vo
 			// note is not in vector
 			if (status == NOTE_ON && velocity > 0.0)
 			{
-				data->activeNotes->emplace_back(noteId, noteOffset, olc::SOUND::GetTime(), velocity, data->voice);
+				data->activeNotes->emplace_back(noteId, noteOffset, olc::SOUND::GetTime(), velocity, data->voice, &data->voice->env);
 			}
 		}
 		else

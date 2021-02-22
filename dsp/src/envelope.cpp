@@ -73,7 +73,8 @@ namespace dsp
         decay(decay), 
         sustain(sustain), 
         release(release),
-        DC_OFFSET(std::numeric_limits<double>::epsilon())
+        DC_OFFSET(std::numeric_limits<double>::epsilon()),
+        ramp(10U)
     {}
 
     void envelope_adsr::setAttack(double att)
@@ -96,7 +97,7 @@ namespace dsp
         release = clamp(rel, 0.001, 4.0);
     }
 
-    double envelope_adsr::process(const double& globalTime, const double& timeOn, const double& timeOff)
+    double envelope_adsr::process(const double& globalTime, const double& timeOn, const double& timeOff, const double& velocity)
     {
         double amplitude = 0.0;
         double releaseAmplitude = 0.0;
@@ -136,11 +137,8 @@ namespace dsp
             amplitude = lerp(releaseAmplitude, 0.0, (globalTime - timeOff) / release);
         }
 
-        // amplitude should not be negative
-        if (amplitude <= DC_OFFSET)
-            amplitude = 0.0;
-
-        return amplitude;
+        ramp.setTarget(amplitude);
+        return ramp.run() * velocity;
     }
 
     json envelope_adsr::serializeParams() const

@@ -23,7 +23,7 @@ namespace dsp
 
 		note();
 
-		note(int id, int offset, double timeOn, double velocity = 1.0, instrument_base* channel = nullptr);
+		note(int id, int offset, double timeOn, double velocity = 1.0, instrument_base* channel = nullptr, envelope_adsr* env = nullptr);
 
 		bool operator==(const note& other) { return id == other.id; }
 	};

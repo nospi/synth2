@@ -4,6 +4,7 @@
 #define ENVELOPE_H
 
 #include <json.hpp>
+#include "ramp.h"
 
 using nlohmann::json;
 
@@ -49,7 +50,7 @@ namespace dsp
 		virtual void setRelease(double ms);
 		virtual void setSampleRate(double sampleRate);
 
-		virtual inline void process(const double& in, double& state)
+		inline void process(const double& in, double& state)
 		{
 			if (in > state)
 				att.process(in, state);
@@ -72,6 +73,7 @@ namespace dsp
 		double decay;
 		double sustain;
 		double release;
+		ramp<double> ramp;
 
 	public:
 		envelope_adsr(double attack = 0.03, double decay = 0.03, double sustain = 1.0, double release = 0.1);
@@ -87,7 +89,7 @@ namespace dsp
 		virtual double getSustain() const { return sustain; }
 		virtual double getRelease() const { return release; }
 
-		virtual double process(const double& globalTime, const double& timeOn, const double& timeOff);
+		virtual double process(const double& globalTime, const double& timeOn, const double& timeOff, const double& velocity);
 
 		virtual json serializeParams() const;
 		virtual void deserializeParams(const json& j);

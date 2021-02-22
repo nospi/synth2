@@ -26,8 +26,8 @@ double instrument::sound(const double& time, note& n, const int& channel, bool& 
 	double sound = 0.0;
 	double amplitude = 0.0;
 
-	amplitude = env.process(time, n.on, n.off);
-	if (amplitude <= 0.0) noteFinished = true;
+	amplitude = n.env.process(time, n.on, n.off, n.velocity);
+	if (amplitude <= 0.0 && n.off > n.on) noteFinished = true;
 
 	for (int i = 0; i < 3; i++)
 		if (osc[i].enabled)
