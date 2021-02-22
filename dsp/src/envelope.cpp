@@ -102,34 +102,26 @@ namespace dsp
         double amplitude = 0.0;
         double releaseAmplitude = 0.0;
 
+        // scale attack with complement of velocity
+        attack = attack - attack * velocity * 0.9;
+
         if (timeOn > timeOff)
         {
             // note is ON
             double lifeTime = globalTime - timeOn;
-            if (lifeTime <= attack)
-            {
-                //amplitude = std::max(0.0001, (lifeTime / attack) * 1.0);
-                amplitude = lerp(0.0001, 1.0, lifeTime / attack);
-                //state = attack;
-            }
+            if (lifeTime <= attack)  
+                amplitude = lerp(0.0, 1.0, lifeTime / attack);
             if (lifeTime > attack && lifeTime <= (attack + decay))
-            {
-                //amplitude = ((lifeTime - attack) / decay) * (sustain - 1.0) + 1.0;
                 amplitude = lerp(1.0, sustain, (lifeTime - attack) / decay);
-                //state = decay;
-            }
             if (lifeTime > (attack + decay))
-            {
                 amplitude = sustain;
-                //state = sustain;
-            }
         }
         else
         {
             // note is OFF
             double lifeTime = timeOff - timeOn;
             if (lifeTime <= attack)
-                releaseAmplitude = lerp(0.0001, 1.0, lifeTime / attack);
+                releaseAmplitude = lerp(0.0, 1.0, lifeTime / attack);
             if (lifeTime > attack && lifeTime <= (attack + decay))
                 releaseAmplitude = lerp(1.0, sustain, (lifeTime - attack) / decay);
             if (lifeTime > (attack + decay))
