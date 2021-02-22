@@ -13,8 +13,8 @@ public:
 	keyboard(std::mutex* muxNotes = nullptr, std::vector<dsp::note>* notes = nullptr);
 	virtual ~keyboard() = default;
 
-	bool key_is_black(int keyId) const;
-	bool key_is_active(int keyId, double* velocity = nullptr);
+	bool keyIsBlack(int keyId) const;
+	bool keyIsActive(int keyId, double* velocity = nullptr);
 
 	int getFirstKeyId() const { return startOffset; }
 	int getLastKeyId() const { return startOffset + numKeys; }

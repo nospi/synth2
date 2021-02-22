@@ -153,7 +153,7 @@ bool gui::panel::keyboard(const char* label, ::keyboard* board)
 		tl.x += 1.0f; br.x -= 1.0f; br.y -= 1.0f;
 		double velocity;
 		ImU32 col = 0xFFEEEEEE;
-		if (board->key_is_active(vKeysWhite[i], &velocity))
+		if (board->keyIsActive(vKeysWhite[i], &velocity))
 		{
 			// g and b should be inversely proportional to the note velocity
 			ImU32 gb = 200 - (ImU32)(velocity * 200.0);
@@ -177,7 +177,7 @@ bool gui::panel::keyboard(const char* label, ::keyboard* board)
 		tl.x += 1.0f; br.x -= 1.0f; br.y -= 1.0f;
 		double velocity;
 		ImU32 col = 0xFF050505;
-		if (board->key_is_active(vKeysBlack[i], &velocity))
+		if (board->keyIsActive(vKeysBlack[i], &velocity))
 		{
 			// g and b 0, red proportional to velocity plus offset
 			ImU32 uVel = (ImU32)(velocity * 127.0) + (128 - 0x05);
