@@ -7,7 +7,7 @@ namespace dsp
 	class ramp
 	{
 	public:
-		ramp(unsigned window = 10U);
+		ramp(unsigned window = 100U);
 
 		T value() const { return m_value; }
 		T target() const { return m_target; }

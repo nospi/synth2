@@ -74,7 +74,7 @@ namespace dsp
         sustain(sustain), 
         release(release),
         DC_OFFSET(std::numeric_limits<double>::epsilon()),
-        ramp(10U)
+        ramp(100U)
     {}
 
     void envelope_adsr::setAttack(double att)
@@ -103,7 +103,7 @@ namespace dsp
         double releaseAmplitude = 0.0;
 
         // scale attack with complement of velocity
-        attack = attack - attack * velocity * 0.9;
+        // attack = (1.0 - velocity) * 0.3 * attack;
 
         if (timeOn > timeOff)
         {
