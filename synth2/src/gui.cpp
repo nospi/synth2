@@ -5,7 +5,6 @@
 #include <ImGuiFileDialog.h>
 #include <ImGuiFileDialogConfig.h>
 
-std::string menu_action = "";
 
 
 void gui::initialise()
@@ -13,11 +12,9 @@ void gui::initialise()
 	ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 }
 
-
-bool gui::process(synth2* app)
+std::string menu_action = "";
+void main_menu(synth2* app)
 {
-	ImGui::DockSpaceOverViewport();
-
 	// draw main menu bar
 	ImGui::BeginMainMenuBar();
 	ImGui::Text("[synth2]");
@@ -73,7 +70,13 @@ bool gui::process(synth2* app)
 		app->inst.deserializeParams(CreateDefaultPreset());
 		menu_action = "";
 	}
+}
 
+
+bool gui::process(synth2* app)
+{
+	ImGui::DockSpaceOverViewport();
+	main_menu(app);
 	gui::panel::master("Output", app);
 	gui::panel::oscillator("Osc I", &app->inst.osc[0]);
 	gui::panel::oscillator("Osc II", &app->inst.osc[1]);
@@ -94,33 +97,33 @@ bool gui::process(synth2* app)
 
 bool gui::panel::visualizer(const char* label, const ringbuffer<double>& vis_waveform, const visualizer_fft& vis_fft)
 {
-	if (ImGui::Begin("Visualizer"))
+	if (!ImGui::Begin("Visualizer"))
 	{
-		// calculate available space and halve height
-		ImVec2 region = ImGui::GetContentRegionAvail();
-		region.y -= region.y * 0.5 + ImGui::GetFrameHeightWithSpacing() * 0.1;
-
-		// lambda helper - required as ImGui does not support doubles
-		auto getVal = [](void* data, int idx)
-		{
-			double* d = (double*)data;
-			return (float)d[idx];
-		};
-
-		size_t sz_waveform, sz_fft;
-		double *p_waveform, *p_fft;
-		p_waveform = vis_waveform.dump(sz_waveform);
-		p_fft = vis_fft.dump(sz_fft);
-
-		ImGui::PlotLines("Waveform", getVal, p_waveform, sz_waveform, vis_waveform.get_phase(), 0, -1.0f, 1.0f, region);
-		ImGui::PlotHistogram("FFT", getVal, p_fft, sz_fft, 0, 0, 0.0f, 64.0f, region);
-
 		ImGui::End();
-		return true;
+		return false;
 	}
 
+	// calculate available space and halve height
+	ImVec2 region = ImGui::GetContentRegionAvail();
+	region.y -= region.y * 0.5 + ImGui::GetFrameHeightWithSpacing() * 0.1;
+
+	// lambda helper - required as Dear ImGui does not support doubles
+	auto getVal = [](void* data, int idx)
+	{
+		double* d = (double*)data;
+		return (float)d[idx];
+	};
+
+	size_t sz_waveform, sz_fft;
+	double *p_waveform, *p_fft;
+	p_waveform = vis_waveform.dump(sz_waveform);
+	p_fft = vis_fft.dump(sz_fft);
+
+	ImGui::PlotLines("Waveform", getVal, p_waveform, sz_waveform, vis_waveform.get_phase(), 0, -1.0f, 1.0f, region);
+	ImGui::PlotHistogram("FFT", getVal, p_fft, sz_fft, 0, 0, 0.0f, 64.0f, region);
+
 	ImGui::End();
-	return false;
+	return true;
 }
 
 bool gui::panel::keyboard(const char* label, ::keyboard* board)
@@ -130,7 +133,7 @@ bool gui::panel::keyboard(const char* label, ::keyboard* board)
 		ImGui::End();
 		return false;
 	}
-	
+
 	ImDrawList* drawList = ImGui::GetWindowDrawList();
 	ImVec2 region = ImGui::GetWindowSize();
 	ImVec2 pos = ImGui::GetWindowPos();
@@ -221,10 +224,7 @@ bool gui::panel::compressor(const char* label, dsp::compressor* comp)
 		if (rat) comp->setRatio(1.0 / (double)ratioLhs);
 
 		if (mkp)
-		{
 			comp->setMakeupGain((double)makeup_dB);
-			//comp->autoMakeupGain = false;
-		}
 
 		float gr[1] = { -(float)comp->getGainReduction() };
 		ImGui::PlotHistogram("Gain Reduction", &gr[0], 1, 0, nullptr, 0.0, 12.0);
@@ -298,7 +298,6 @@ bool gui::panel::oscillator(const char* label, dsp::oscillator* osc)
 		float phase = (float)osc->getPhase();
 
 		ImGui::Checkbox("Enabled", &osc->enabled);
-
 		{
 			// waveform selection
 			const char* labels[] = { "Sine", "Square", "Sawtooth", "Triangle" };
@@ -360,54 +359,55 @@ bool gui::panel::envelope_adsr(const char* label, dsp::envelope_adsr* env)
 {
 	if (env == nullptr) return false;
 
-	if (ImGui::Begin("Envelope"))
+	if (!ImGui::Begin("Envelope"))
 	{
-		float attack = (float)env->getAttack() * 1000.0f;
-		float decay = (float)env->getDecay() * 1000.0f;
-		float sustain = (float)env->getSustain() * 100.0f;
-		float release = (float)env->getRelease() * 1000.0f;
-
-		bool atk = ImGui::SliderFloat("Attack", &attack, 1.0f, 4000.0f, "%.2fms", ImGuiSliderFlags_Logarithmic);
-		bool dec = ImGui::SliderFloat("Decay", &decay, 1.0f, 4000.0f, "%.2fms", ImGuiSliderFlags_Logarithmic);
-		bool sus = ImGui::SliderFloat("Sustain", &sustain, 0.0f, 100.0f, "%.2f%%");
-		bool rel = ImGui::SliderFloat("Release", &release, 1.0f, 4000.0f, "%.2fms", ImGuiSliderFlags_Logarithmic);
-
-		if (atk) env->setAttack((double)attack * 0.001f);
-		if (dec) env->setDecay((double)decay * 0.001f);
-		if (sus) env->setSustain((double)sustain * 0.01f);
-		if (rel) env->setRelease((double)release * 0.001f);
-
 		ImGui::End();
-		return true;
+		return false;
 	}
 
+	float attack = (float)env->getAttack() * 1000.0f;
+	float decay = (float)env->getDecay() * 1000.0f;
+	float sustain = (float)env->getSustain() * 100.0f;
+	float release = (float)env->getRelease() * 1000.0f;
+
+	bool atk = ImGui::SliderFloat("Attack", &attack, 1.0f, 4000.0f, "%.2fms", ImGuiSliderFlags_Logarithmic);
+	bool dec = ImGui::SliderFloat("Decay", &decay, 1.0f, 4000.0f, "%.2fms", ImGuiSliderFlags_Logarithmic);
+	bool sus = ImGui::SliderFloat("Sustain", &sustain, 0.0f, 100.0f, "%.2f%%");
+	bool rel = ImGui::SliderFloat("Release", &release, 1.0f, 4000.0f, "%.2fms", ImGuiSliderFlags_Logarithmic);
+
+	if (atk) env->setAttack((double)attack * 0.001f);
+	if (dec) env->setDecay((double)decay * 0.001f);
+	if (sus) env->setSustain((double)sustain * 0.01f);
+	if (rel) env->setRelease((double)release * 0.001f);
+
 	ImGui::End();
-	return false;
+	return true;
 }
 
 
 bool gui::panel::master(const char* label, synth2* app)
 {
-	if (ImGui::Begin(label))
+	if (!ImGui::Begin(label))
 	{
-		int flags = ImGuiSliderFlags_AlwaysClamp;
-		float master = (float)app->inst.master_dB;
-		float driveIn_dB = (float)app->inst.lim.getInputDrive();
-		float lim_gr[] = { -(float)app->inst.lim.getGainReduction_dB() };
-
-		ImGui::InputText("Title", &app->inst.title);		
-		bool bDriveIn = ImGui::SliderFloat("Input Drive", &driveIn_dB, -48.0, 12.0, (driveIn_dB > 0.0) ? "+%.2fdB" : "%.2fdB", flags);
-		ImGui::PlotHistogram("Limiter GR", &lim_gr[0], 1, 0, 0, 0.0, 12.0);
-		bool bMaster = ImGui::SliderFloat("Master", &master, -48.0f, 12.0f, (master > 0.0f) ? "+%2.fdB" : "%.2fdB", flags);
-
-		if (bDriveIn) app->inst.lim.setInputDrive((double)driveIn_dB);
-		if (bMaster) app->inst.master_dB = (double)master;
-
 		ImGui::End();
-		return true;
+		return false;
 	}
 
-	return false;
+	int flags = ImGuiSliderFlags_AlwaysClamp;
+	float master = (float)app->inst.master_dB;
+	float driveIn_dB = (float)app->inst.lim.getInputDrive();
+	float lim_gr[] = { -(float)app->inst.lim.getGainReduction_dB() };
+
+	ImGui::InputText("Title", &app->inst.title);		
+	bool bDriveIn = ImGui::SliderFloat("Input Drive", &driveIn_dB, -48.0, 12.0, (driveIn_dB > 0.0) ? "+%.2fdB" : "%.2fdB", flags);
+	ImGui::PlotHistogram("Limiter GR", &lim_gr[0], 1, 0, 0, 0.0, 12.0);
+	bool bMaster = ImGui::SliderFloat("Master", &master, -48.0f, 12.0f, (master > 0.0f) ? "+%2.fdB" : "%.2fdB", flags);
+
+	if (bDriveIn) app->inst.lim.setInputDrive((double)driveIn_dB);
+	if (bMaster) app->inst.master_dB = (double)master;
+
+	ImGui::End();
+	return true;
 }
 
 
@@ -416,17 +416,20 @@ bool gui::fx::fx_unit(instrument* inst, int slot)
 	bool result = false;
 	std::string label = "FX " + std::to_string(slot + 1);
 
-	if (ImGui::Begin(label.c_str()))
+	if (!ImGui::Begin(label.c_str()))
 	{
-		// draw fx unit selector combo
-		unit_selection(inst, slot);
+		ImGui::End();
+		return false;
+	}
 
-		// draw fx UI if assigned
-		if (inst->rack[slot] != nullptr)
-		{
-			if (inst->rack[slot]->getTitle() == "Mono Delay")
-				result = mono_delay((dsp::mono_delay*)inst->rack[slot]);
-		}
+	// draw fx unit selector combo
+	unit_selection(inst, slot);
+
+	// draw fx UI if assigned
+	if (inst->rack[slot] != nullptr)
+	{
+		if (inst->rack[slot]->getTitle() == "Mono Delay")
+			result = mono_delay((dsp::mono_delay*)inst->rack[slot]);
 	}
 
 	ImGui::End();
