@@ -1,0 +1,109 @@
+{
+    "comp": {
+        "attack": 10.0,
+        "autoMakeupGain": false,
+        "enabled": false,
+        "makeupGain": 0.0,
+        "ratio": 1.0,
+        "release": 100.0,
+        "threshold": 0.0
+    },
+    "env": {
+        "attack": 0.009500000451225787,
+        "decay": 0.017990000625597302,
+        "release": 0.008820000113751725,
+        "sustain": 0.6833000030376013
+    },
+    "filter": [
+        {
+            "cutoff": 0.99,
+            "enabled": false,
+            "order": 3,
+            "resonance": 0.0,
+            "type": 1
+        },
+        {
+            "cutoff": 0.99,
+            "enabled": false,
+            "order": 3,
+            "resonance": 0.0,
+            "type": 1
+        }
+    ],
+    "fx": [
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": {
+                "feedback": 0.3258000183105469,
+                "hpf": {
+                    "cutoff": 0.34329070560515873,
+                    "enabled": true,
+                    "order": 8,
+                    "resonance": 0.2,
+                    "type": 0
+                },
+                "lpf": {
+                    "cutoff": 0.99,
+                    "enabled": true,
+                    "order": 4,
+                    "resonance": 0.1,
+                    "type": 1
+                },
+                "mix": 0.08140000343322754,
+                "time": 0.25960000610351563
+            },
+            "unit": "Mono Delay"
+        }
+    ],
+    "lfo": {
+        "amplitude": 0.0,
+        "centOffset": 0,
+        "enabled": false,
+        "func": 0,
+        "harmonics": 1,
+        "noteOffset": 0,
+        "phase": 0.0
+    },
+    "master_dB": 0.0,
+    "osc": [
+        {
+            "amplitude": 1.0,
+            "centOffset": 0,
+            "enabled": true,
+            "func": 1,
+            "harmonics": 4,
+            "noteOffset": 0,
+            "phase": 0.0
+        },
+        {
+            "amplitude": 1.0,
+            "centOffset": 0,
+            "enabled": false,
+            "func": 0,
+            "harmonics": 4,
+            "noteOffset": 0,
+            "phase": 0.0
+        },
+        {
+            "amplitude": 1.0,
+            "centOffset": 0,
+            "enabled": false,
+            "func": 0,
+            "harmonics": 4,
+            "noteOffset": 0,
+            "phase": 0.0
+        }
+    ],
+    "title": "Jazz Keys"
+}

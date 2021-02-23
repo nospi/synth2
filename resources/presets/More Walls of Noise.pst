@@ -1,0 +1,163 @@
+{
+    "comp": {
+        "attack": 10.0,
+        "autoMakeupGain": false,
+        "enabled": false,
+        "makeupGain": 0.0,
+        "ratio": 1.0,
+        "release": 100.0,
+        "threshold": 0.0
+    },
+    "env": {
+        "attack": 0.009500000451225787,
+        "decay": 0.017990000625597302,
+        "release": 0.008820000113751725,
+        "sustain": 0.6833000030376013
+    },
+    "filter": [
+        {
+            "cutoff": 0.15822766085600906,
+            "enabled": true,
+            "order": 2,
+            "resonance": 0.0,
+            "type": 1
+        },
+        {
+            "cutoff": 0.05794194989193594,
+            "enabled": true,
+            "order": 3,
+            "resonance": 0.3952000045776367,
+            "type": 2
+        }
+    ],
+    "fx": [
+        {
+            "params": {
+                "feedback": 0.9094999694824218,
+                "hpf": {
+                    "cutoff": 0.013605442176870748,
+                    "enabled": true,
+                    "order": 8,
+                    "resonance": 0.2,
+                    "type": 0
+                },
+                "lpf": {
+                    "cutoff": 0.36281179138321995,
+                    "enabled": true,
+                    "order": 4,
+                    "resonance": 0.1,
+                    "type": 1
+                },
+                "mix": 0.05429999828338623,
+                "time": 0.25960000610351563
+            },
+            "unit": "Mono Delay"
+        },
+        {
+            "params": {
+                "feedback": 0.16739999771118164,
+                "hpf": {
+                    "cutoff": 0.001,
+                    "enabled": true,
+                    "order": 8,
+                    "resonance": 0.2,
+                    "type": 0
+                },
+                "lpf": {
+                    "cutoff": 0.10480861810870182,
+                    "enabled": true,
+                    "order": 4,
+                    "resonance": 0.1,
+                    "type": 1
+                },
+                "mix": 0.25790000915527345,
+                "time": 0.21352999877929688
+            },
+            "unit": "Mono Delay"
+        },
+        {
+            "params": {
+                "feedback": 0.6561000061035156,
+                "hpf": {
+                    "cutoff": 0.001,
+                    "enabled": true,
+                    "order": 8,
+                    "resonance": 0.2,
+                    "type": 0
+                },
+                "lpf": {
+                    "cutoff": 0.23032153486394558,
+                    "enabled": true,
+                    "order": 4,
+                    "resonance": 0.1,
+                    "type": 1
+                },
+                "mix": 0.18100000381469727,
+                "time": 1.831050048828125
+            },
+            "unit": "Mono Delay"
+        },
+        {
+            "params": {
+                "feedback": 0.97,
+                "hpf": {
+                    "cutoff": 0.019846711796697846,
+                    "enabled": true,
+                    "order": 8,
+                    "resonance": 0.2,
+                    "type": 0
+                },
+                "lpf": {
+                    "cutoff": 0.1709827628968254,
+                    "enabled": true,
+                    "order": 4,
+                    "resonance": 0.1,
+                    "type": 1
+                },
+                "mix": 0.07690000057220459,
+                "time": 0.3595
+            },
+            "unit": "Mono Delay"
+        }
+    ],
+    "lfo": {
+        "amplitude": 0.0,
+        "centOffset": 0,
+        "enabled": false,
+        "func": 0,
+        "harmonics": 1,
+        "noteOffset": 0,
+        "phase": 0.0
+    },
+    "master_dB": 0.0,
+    "osc": [
+        {
+            "amplitude": 1.0,
+            "centOffset": 0,
+            "enabled": true,
+            "func": 2,
+            "harmonics": 6,
+            "noteOffset": 0,
+            "phase": 0.0
+        },
+        {
+            "amplitude": 1.0,
+            "centOffset": 0,
+            "enabled": false,
+            "func": 0,
+            "harmonics": 4,
+            "noteOffset": 0,
+            "phase": 0.0
+        },
+        {
+            "amplitude": 1.0,
+            "centOffset": 0,
+            "enabled": false,
+            "func": 0,
+            "harmonics": 4,
+            "noteOffset": 0,
+            "phase": 0.0
+        }
+    ],
+    "title": "More Walls of Noise"
+}

@@ -183,7 +183,7 @@ double synth2::makeNoise(int channel, double globalTime, double timeStep)
 		bool noteFinished = false;
 		double sound = 0.0;
 		if (n.channel != nullptr)
-			sound = n.channel->sound(globalTime, n, 0, noteFinished);
+			sound = n.channel->sound(globalTime, n, channel, noteFinished);
 		mixedOutput += sound;
 
 		if (noteFinished)
