@@ -20,7 +20,7 @@ namespace dsp
 			k_num_tuning_systems
 		};
 
-		inline double noteToHz(int noteId, int noteOffset = 0, int centOffset = 0, tuning_system system = equal_temperament, double concertPitch = 440.0)
+		inline double noteToHz(int noteId, double noteOffset = 0.0, double centOffset = 0.0, tuning_system system = equal_temperament, double concertPitch = 440.0)
 		{
 			switch (system)
 			{
