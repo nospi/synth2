@@ -1,7 +1,7 @@
 #include "ramp.h"
 
 template<class T>
-dsp::ramp<T>::ramp(unsigned window) : m_window(window), m_value(T(0)), m_target(T(0)) {}
+dsp::ramp<T>::ramp(unsigned window, T initial_value) : m_window(window), m_value(initial_value), m_target(initial_value) {}
 
 template<class T>
 void dsp::ramp<T>::setValue(const T& value)
@@ -20,6 +20,9 @@ template<class T>
 T dsp::ramp<T>::run()
 {
 	if (m_target != m_value)
-		m_value += (m_target - m_value) / m_window;
+	{
+		T diff = m_target - m_value;
+		m_value += diff * 1.0 / (T)m_window;
+	}
 	return m_value;
 }
