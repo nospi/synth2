@@ -6,6 +6,7 @@
 
 #include <cmath>
 #include <algorithm>
+#include <string>
 
 namespace dsp
 {
@@ -19,19 +20,33 @@ namespace dsp
 			k_num_tuning_systems
 		};
 
-		inline double noteToHz(int noteId, int noteOffset = 0, int centOffset = 0, tuning_system system = equal_temperament)
+		inline double noteToHz(int noteId, int noteOffset = 0, int centOffset = 0, tuning_system system = equal_temperament, double concertPitch = 440.0)
 		{
 			switch (system)
 			{
 			case equal_temperament:
-				return 8 * pow(1.0594630943592952645618252949463, noteId + noteOffset) * pow(1.0005777895065548488418016859213, centOffset);
+				return concertPitch * pow(1.0594630943592952645618252949463, noteId + noteOffset - 69) * pow(1.0005777895065548488418016859213, centOffset);
 			case just_intonation:
 			default:
 				return 0.0;
 			}
 		}
 
-		//inline int hzToNote(double hz);
+		inline int hzToNoteId(double hz, tuning_system system = equal_temperament, double concertPitch = 440.0)
+		{
+			switch (system)
+			{
+			case equal_temperament:
+			{
+				return 12 * log2(hz / concertPitch) + 69;
+			}
+			case just_intonation:
+			default:
+				return 0;
+			}
+		}
+
+		std::string noteName(int noteId);
 	};
 }
 

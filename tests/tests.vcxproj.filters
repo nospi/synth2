@@ -33,5 +33,11 @@
     <ClCompile Include="src\limiter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\scale.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".runsettings" />
   </ItemGroup>
 </Project>

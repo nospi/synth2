@@ -97,7 +97,11 @@
     <ClCompile Include="src\gain.cpp" />
     <ClCompile Include="src\limiter.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\scale.cpp" />
     <ClCompile Include="src\util.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".runsettings" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
