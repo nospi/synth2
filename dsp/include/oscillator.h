@@ -9,6 +9,7 @@
 #include "wavegen.h"
 #include "note.h"
 #include <json.hpp>
+#include "ramp.h"
 
 using nlohmann::json;
 
@@ -21,12 +22,13 @@ namespace dsp
 		bool enabled = false;
 
 	protected:
-		int noteOffset = 0;
-		int centOffset = 0;
-		double amplitude = 0.5;
-		double phase = 0.0;
+		ramp<double> noteOffset;
+		ramp<double> centOffset;
+		ramp<double> amplitude;
+		ramp<double> phase;
 		wavegen::wave_func func = wavegen::SINE;
 		int harmonics = 4;
+		ramp<double> freq_ramp;
 
 	public:
 		virtual void setAmplitude(double amp);
@@ -36,13 +38,13 @@ namespace dsp
 		virtual void setNoteOffset(int offset);
 		virtual void setCentOffset(int offset);
 
-		virtual double getAmplitude() const { return amplitude; }
-		virtual double getPhase() const { return phase; }
+		virtual double getAmplitude() const { return amplitude.target(); }
+		virtual double getPhase() const { return phase.target(); }
 		virtual wavegen::wave_func getWaveFunc() const { return func; }
 		virtual int getHarmonics() const { return harmonics; }
-		virtual int getNoteOffset() const { return noteOffset; }
-		virtual int getCentOffset() const { return centOffset; }
-		virtual int getTotalCentOffset() const { return noteOffset * 100 + centOffset; }
+		virtual int getNoteOffset() const { return (int)noteOffset.target(); }
+		virtual int getCentOffset() const { return (int)centOffset.target(); }
+		virtual int getTotalCentOffset() const { return (int)noteOffset.target() * 100 + (int)centOffset.target(); }
 
 		virtual json serializeParams() const;
 		virtual void deserializeParams(const json& j);
