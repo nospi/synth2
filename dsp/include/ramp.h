@@ -9,9 +9,9 @@ namespace dsp
 	public:
 		onepole_lpf(double ms = 5.0, double sampleRate = 44100.0)
 		{
-			a = exp(-6.283185307179586476925286766559 / (ms * 0.001 * sampleRate));
-			b = 1.0 - a;
-			z = 0.0;
+			a = T(exp(-6.283185307179586476925286766559 / (ms * 0.001 * sampleRate)));
+			b = T(1.0 - a);
+			z = T(0.0);
 		}
 
 		~onepole_lpf() = default;
