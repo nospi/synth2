@@ -7,7 +7,7 @@ namespace dsp
 
 	oscillator::oscillator(double amplitude, double phase, wavegen::wave_func func, int harmonics) :
 		enabled(false), harmonics(harmonics), func(func), 
-		freq_ramp(10U), phase(441U, 0.0), amplitude(441U, 1.0),
+		phase(441U, 0.0), amplitude(441U, 1.0),
 		noteOffset(1000U, 0), centOffset(1000U, 0)
 	{}
 

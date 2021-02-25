@@ -28,7 +28,6 @@ namespace dsp
 		ramp<double> phase;
 		wavegen::wave_func func = wavegen::SINE;
 		int harmonics = 4;
-		ramp<double> freq_ramp;
 
 	public:
 		virtual void setAmplitude(double amp);
