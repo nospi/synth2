@@ -1,0 +1,127 @@
+{
+    "comp": {
+        "attack": 18.200000762939453,
+        "autoMakeupGain": false,
+        "enabled": true,
+        "makeupGain": 7.659999847412109,
+        "ratio": 0.5376344044672463,
+        "release": 54.38999938964844,
+        "threshold": -9.119999885559082
+    },
+    "env": {
+        "attack": 0.2308600115756132,
+        "decay": 0.04597000340416102,
+        "release": 0.39042003197168995,
+        "sustain": 0.8869000045903022
+    },
+    "filter": [
+        {
+            "cutoff": 0.03066893424036281,
+            "enabled": true,
+            "order": 3,
+            "resonance": 0.25829999923706054,
+            "type": 3
+        },
+        {
+            "cutoff": 0.23903355743339003,
+            "enabled": true,
+            "order": 5,
+            "resonance": 0.44459999084472657,
+            "type": 1
+        }
+    ],
+    "fx": [
+        {
+            "params": {
+                "feedback": 0.8144999694824219,
+                "hpf": {
+                    "cutoff": 0.013605442176870748,
+                    "enabled": true,
+                    "order": 8,
+                    "resonance": 0.2,
+                    "type": 0
+                },
+                "lpf": {
+                    "cutoff": 0.36281179138321995,
+                    "enabled": true,
+                    "order": 4,
+                    "resonance": 0.1,
+                    "type": 1
+                },
+                "mix": 0.18100000381469727,
+                "time": 1.555969970703125
+            },
+            "unit": "Mono Delay"
+        },
+        {
+            "params": {
+                "feedback": 0.6741999816894532,
+                "hpf": {
+                    "cutoff": 0.06429750611181972,
+                    "enabled": true,
+                    "order": 8,
+                    "resonance": 0.2,
+                    "type": 0
+                },
+                "lpf": {
+                    "cutoff": 0.99,
+                    "enabled": true,
+                    "order": 4,
+                    "resonance": 0.1,
+                    "type": 1
+                },
+                "mix": 0.1356999969482422,
+                "time": 4.0
+            },
+            "unit": "Mono Delay"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        }
+    ],
+    "lfo": {
+        "amplitude": 0.0,
+        "centOffset": 0,
+        "enabled": false,
+        "func": 0,
+        "harmonics": 1,
+        "noteOffset": 0,
+        "phase": 0.0
+    },
+    "master_dB": 0.0,
+    "osc": [
+        {
+            "amplitude": 0.11002718356313161,
+            "centOffset": 0,
+            "enabled": true,
+            "func": 0,
+            "harmonics": 4,
+            "noteOffset": 0,
+            "phase": 0.0
+        },
+        {
+            "amplitude": 0.25527014035605783,
+            "centOffset": 0,
+            "enabled": true,
+            "func": 3,
+            "harmonics": 6,
+            "noteOffset": -24,
+            "phase": 0.0
+        },
+        {
+            "amplitude": 0.7834296530882873,
+            "centOffset": 0,
+            "enabled": true,
+            "func": 2,
+            "harmonics": 4,
+            "noteOffset": -12,
+            "phase": 0.0
+        }
+    ],
+    "title": "Flooblette"
+}

@@ -1,0 +1,109 @@
+{
+    "comp": {
+        "attack": 60.09000015258789,
+        "autoMakeupGain": false,
+        "enabled": false,
+        "makeupGain": 3.741227808150783,
+        "ratio": 0.2169197334139026,
+        "release": 85.08999633789063,
+        "threshold": -10.079999923706055
+    },
+    "env": {
+        "attack": 0.03539000107058321,
+        "decay": 0.20198000532107407,
+        "release": 0.09575000454788096,
+        "sustain": 0.7649999829009175
+    },
+    "filter": [
+        {
+            "cutoff": 0.8163265306122449,
+            "enabled": false,
+            "order": 2,
+            "resonance": 0.20790000915527343,
+            "type": 1
+        },
+        {
+            "cutoff": 0.01090249405426233,
+            "enabled": true,
+            "order": 2,
+            "resonance": 0.0,
+            "type": 0
+        }
+    ],
+    "fx": [
+        {
+            "params": {
+                "feedback": 0.68,
+                "hpf": {
+                    "cutoff": 0.004600000013840171,
+                    "enabled": true,
+                    "order": 8,
+                    "resonance": 0.2,
+                    "type": 0
+                },
+                "lpf": {
+                    "cutoff": 0.4824267467403628,
+                    "enabled": true,
+                    "order": 4,
+                    "resonance": 0.1,
+                    "type": 1
+                },
+                "mix": 0.015,
+                "time": 0.9150599975585938
+            },
+            "unit": "Mono Delay"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        }
+    ],
+    "lfo": {
+        "amplitude": 1.0,
+        "centOffset": 0.0,
+        "enabled": false,
+        "func": 0,
+        "harmonics": 1,
+        "noteOffset": 0.0,
+        "phase": 0.0
+    },
+    "master_dB": 0.0,
+    "osc": [
+        {
+            "amplitude": 0.3576843880093557,
+            "centOffset": 11.0,
+            "enabled": true,
+            "func": 0,
+            "harmonics": 4,
+            "noteOffset": -12.0,
+            "phase": 0.03999999910593033
+        },
+        {
+            "amplitude": 0.6237348423307667,
+            "centOffset": 0.0,
+            "enabled": true,
+            "func": 3,
+            "harmonics": 7,
+            "noteOffset": 0.0,
+            "phase": 0.0
+        },
+        {
+            "amplitude": 0.509917603173552,
+            "centOffset": 17.0,
+            "enabled": true,
+            "func": 3,
+            "harmonics": 7,
+            "noteOffset": 7.0,
+            "phase": -0.2800000011920929
+        }
+    ],
+    "title": "Chordal"
+}
