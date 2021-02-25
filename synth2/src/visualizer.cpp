@@ -27,7 +27,7 @@ void visualizer_fft::processFFT()
 {
 	size_t sz = 0;
 	size_t sz_p = 0;
-	dsp::fft::fft_magnitude_db(ringbuffer::dump(sz), postMem.dump(sz_p), sz);
+	dsp::fft::fft_magnitude_db(ringbuffer::dump(sz), postMem.dump(sz_p), (int)sz);
 	// populate output buffer with fft output bins; use logarithmic array indexing
 	output.copy_from(postMem.dump(sz_p), 0, sz_p / 2, true);
 }

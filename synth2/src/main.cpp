@@ -3,6 +3,7 @@
 #define OLC_PGEX_DEAR_IMGUI_IMPLEMENTATION
 
 #include "synth2.h"
+#include <iostream>
 
 namespace olc
 {
@@ -81,6 +82,7 @@ void parse_args(int argc, char* argv[], olc::parameters& pge_config, synth2::par
 	catch (std::exception& e)
 	{
 		// improperly formatted args
+		std::cerr << e.what() << std::endl;
 		print_help(argc, argv);
 		exit(EXIT_FAILURE);
 	}

@@ -39,7 +39,7 @@ namespace dsp
 			case equal_temperament:
 			{
 				hz = std::ceil(hz * 100.0) / 100.0; // round to 2 decimal places
-				return 12 * log2(hz / concertPitch) + 69;
+				return (int)(12 * log2(hz / concertPitch) + 69);
 			}
 			case just_intonation:
 			default:

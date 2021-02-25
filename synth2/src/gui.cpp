@@ -105,7 +105,7 @@ bool gui::panel::visualizer(const char* label, const ringbuffer<double>& vis_wav
 
 	// calculate available space and halve height
 	ImVec2 region = ImGui::GetContentRegionAvail();
-	region.y -= region.y * 0.5 + ImGui::GetFrameHeightWithSpacing() * 0.1;
+	region.y -= region.y * 0.5f + ImGui::GetFrameHeightWithSpacing() * 0.1f;
 
 	// lambda helper - required as Dear ImGui does not support doubles
 	auto getVal = [](void* data, int idx)
@@ -119,8 +119,8 @@ bool gui::panel::visualizer(const char* label, const ringbuffer<double>& vis_wav
 	p_waveform = vis_waveform.dump(sz_waveform);
 	p_fft = vis_fft.dump(sz_fft);
 
-	ImGui::PlotLines("Waveform", getVal, p_waveform, sz_waveform, vis_waveform.get_phase(), 0, -1.0f, 1.0f, region);
-	ImGui::PlotHistogram("FFT", getVal, p_fft, sz_fft, 0, 0, 0.0f, 64.0f, region);
+	ImGui::PlotLines("Waveform", getVal, p_waveform, (int)sz_waveform, (int)vis_waveform.get_phase(), 0, -1.0f, 1.0f, region);
+	ImGui::PlotHistogram("FFT", getVal, p_fft, (int)sz_fft, 0, 0, 0.0f, 64.0f, region);
 
 	ImGui::End();
 	return true;
@@ -475,7 +475,7 @@ bool gui::fx::mono_delay(dsp::mono_delay* unit)
 	float lo_cutoff = (float)unit->getLoCut();
 	
 	ImGui::Checkbox("Enabled", &unit->enabled);
-	bool bTime = ImGui::SliderFloat("Time (ms)", &time, 3.0, unit->MAX_DELAY_TIME * 1000.0f, "%.2fms", ImGuiSliderFlags_AlwaysClamp | ImGuiSliderFlags_Logarithmic);
+	bool bTime = ImGui::SliderFloat("Time (ms)", &time, 3.0, (float)unit->MAX_DELAY_TIME * 1000.0f, "%.2fms", ImGuiSliderFlags_AlwaysClamp | ImGuiSliderFlags_Logarithmic);
 	bool bFb = ImGui::SliderFloat("Feedback", &feedback, 0.0f, 100.0f, "%.2f%%", ImGuiSliderFlags_AlwaysClamp);
 	bool bMix = ImGui::SliderFloat("Mix", &mix, 0.0f, 100.0f, "%.2f%%", ImGuiSliderFlags_AlwaysClamp);
 	bool bHPF = ImGui::SliderFloat("Low Cutoff", &lo_cutoff, 20.0, (float)unit->getSampleRate() * 0.3f, "%.2f Hz", ImGuiSliderFlags_Logarithmic);
