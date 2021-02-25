@@ -33,13 +33,14 @@ but I'd be open to pull requests for additional environments.
 - QWERTY *or* MIDI keyboard input
 - Configurable UI
 - Keyboard visualizer
+- Velocity sensitivity
+- (Some) parameter smoothing
 
 ### FX Units
 - Mono Delay
 
 ## Upcoming Plans
 #### Proposed Features
-- Parameter Smoothing
 - Concurrent multi-channel support
 - Efficient wave function approximations
 - LFO

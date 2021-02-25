@@ -6,17 +6,19 @@ namespace dsp
 {
 
 	oscillator::oscillator(double amplitude, double phase, wavegen::wave_func func, int harmonics) :
-		amplitude(amplitude), phase(phase), enabled(false),
-		harmonics(harmonics), func(func) {}
+		enabled(false), harmonics(harmonics), func(func), 
+		freq_ramp(10U), phase(441U, 0.0), amplitude(441U, 1.0),
+		noteOffset(1000U, 0), centOffset(1000U, 0)
+	{}
 
 	void oscillator::setAmplitude(double amp)
 	{
-		amplitude = clamp(amp, 0.0, 2.0);
+		amplitude.setTarget(clamp(amp, 0.0, 2.0));
 	}
 
 	void oscillator::setPhase(double theta)
 	{
-		phase = clamp(theta, -1.0, 1.0);
+		phase.setTarget(clamp(theta, -1.0, 1.0));
 	}
 
 	void oscillator::setHarmonics(int harms)
@@ -26,12 +28,12 @@ namespace dsp
 
 	void oscillator::setNoteOffset(int offset)
 	{
-		noteOffset = clamp(offset, -24, 24);
+		noteOffset.setTarget(clamp(offset, -24, 24));
 	}
 
 	void oscillator::setCentOffset(int offset)
 	{
-		centOffset = clamp(offset, -100, 100);
+		centOffset.setTarget(clamp(offset, -100, 100));
 	}
 
 	void oscillator::setWaveFunc(wavegen::wave_func waveform)
@@ -43,18 +45,22 @@ namespace dsp
 
 	double oscillator::run(const note& n, const double& time)
 	{
-		double frequency = scale::noteToHz(n.id, noteOffset, centOffset);
-		return wavegen::Generate(func, frequency, time + phase * 1.0 / frequency, std::min(1.0, amplitude), harmonics);
+		noteOffset.run();
+		centOffset.run();
+		amplitude.run();
+		phase.run();
+		double frequency = scale::noteToHz(n.id, noteOffset.value(), centOffset.value());
+		return wavegen::Generate(func, frequency, time + phase.value() * 1.0 / frequency, std::min(1.0, amplitude.value()), harmonics);
 	}
 
 	json oscillator::serializeParams() const
 	{
 		return {
 			{ "enabled", enabled },
-			{ "amplitude", amplitude },
-			{ "noteOffset", noteOffset },
-			{ "centOffset", centOffset },
-			{ "phase", phase },
+			{ "amplitude", amplitude.target() },
+			{ "noteOffset", noteOffset.target() },
+			{ "centOffset", centOffset.target() },
+			{ "phase", phase.target() },
 			{ "func", func },
 			{ "harmonics", harmonics }
 		};
@@ -63,10 +69,10 @@ namespace dsp
 	void oscillator::deserializeParams(const json& j)
 	{
 		enabled = j["enabled"];
-		amplitude = j["amplitude"];
-		noteOffset = j["noteOffset"];
-		centOffset = j["centOffset"];
-		phase = j["phase"];
+		amplitude.setValue(j["amplitude"]);
+		noteOffset.setValue(j["noteOffset"]);
+		centOffset.setValue(j["centOffset"]);
+		phase.setValue(j["phase"]);
 		func = j["func"];
 		harmonics = j["harmonics"];
 	}
