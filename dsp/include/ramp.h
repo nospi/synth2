@@ -4,6 +4,35 @@ namespace dsp
 {
 
 	template<class T>
+	class onepole_lpf
+	{
+	public:
+		onepole_lpf(double ms = 5.0, double sampleRate = 44100.0)
+		{
+			a = exp(-6.283185307179586476925286766559 / (ms * 0.001 * sampleRate));
+			b = 1.0 - a;
+			z = 0.0;
+		}
+
+		~onepole_lpf() = default;
+
+		T process(T in)
+		{
+			z = (in * b) + (z * a);
+			return z;
+		}
+
+	private:
+		T a;
+		T b;
+		T z;
+	};
+
+	template class onepole_lpf<float>;
+	template class onepole_lpf<double>;
+
+
+	template<class T>
 	class ramp
 	{
 	public:
