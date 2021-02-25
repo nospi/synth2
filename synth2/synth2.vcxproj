@@ -119,7 +119,6 @@
     <ClCompile Include="src\keyboard.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\preset.cpp" />
-    <ClCompile Include="src\ringbuf.cpp" />
     <ClCompile Include="src\synth2.cpp" />
     <ClCompile Include="src\visualizer.cpp" />
   </ItemGroup>

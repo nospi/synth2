@@ -66,9 +66,6 @@
     <ClCompile Include="src\visualizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ringbuf.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\libs\imgui_filedialog\ImGuiFileDialog.cpp">
       <Filter>Source Files\imgui</Filter>
     </ClCompile>

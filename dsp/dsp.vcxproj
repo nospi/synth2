@@ -20,10 +20,8 @@
     <ClCompile Include="src\limiter.cpp" />
     <ClCompile Include="src\note.cpp" />
     <ClCompile Include="src\oscillator.cpp" />
-    <ClCompile Include="src\ramp.cpp" />
     <ClCompile Include="src\resonant_filter.cpp" />
     <ClCompile Include="src\scale.cpp" />
-    <ClCompile Include="src\util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\compressor.h" />
