@@ -30,23 +30,23 @@ namespace dsp
 		int harmonics = 4;
 
 	public:
-		virtual void setAmplitude(double amp);
-		virtual void setPhase(double theta);
-		virtual void setWaveFunc(wavegen::wave_func func);
-		virtual void setHarmonics(int harms);
-		virtual void setNoteOffset(int offset);
-		virtual void setCentOffset(int offset);
+		void setAmplitude(double amp);
+		void setPhase(double theta);
+		void setWaveFunc(wavegen::wave_func func);
+		void setHarmonics(int harms);
+		void setNoteOffset(int offset);
+		void setCentOffset(int offset);
 
-		virtual double getAmplitude() const { return amplitude.target(); }
-		virtual double getPhase() const { return phase.target(); }
-		virtual wavegen::wave_func getWaveFunc() const { return func; }
-		virtual int getHarmonics() const { return harmonics; }
-		virtual int getNoteOffset() const { return (int)noteOffset.target(); }
-		virtual int getCentOffset() const { return (int)centOffset.target(); }
-		virtual int getTotalCentOffset() const { return (int)noteOffset.target() * 100 + (int)centOffset.target(); }
+		double getAmplitude() const { return amplitude.target(); }
+		double getPhase() const { return phase.target(); }
+		wavegen::wave_func getWaveFunc() const { return func; }
+		int getHarmonics() const { return harmonics; }
+		int getNoteOffset() const { return (int)noteOffset.target(); }
+		int getCentOffset() const { return (int)centOffset.target(); }
+		int getTotalCentOffset() const { return (int)noteOffset.target() * 100 + (int)centOffset.target(); }
 
-		virtual json serializeParams() const;
-		virtual void deserializeParams(const json& j);
+		json serializeParams() const;
+		void deserializeParams(const json& j);
 
 	public:
 		oscillator(double amplitude = 1.0, double phase = 0.0, wavegen::wave_func func = wavegen::SINE, int harmonics = 4);
@@ -56,7 +56,7 @@ namespace dsp
 		* For keyboard/note based synth - frequency will be calculated
 		* based on note id and semitone/cent offsets.
 		*/
-		virtual double run(const note& n, const double& time);
+		double run(const note& n, const double& time);
 
 	};
 
