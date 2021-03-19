@@ -64,7 +64,7 @@
 
 	Author
 	~~~~~~
-	David Barr, aka javidx9, ©OneLoneCoder 2019
+	David Barr, aka javidx9, ï¿½OneLoneCoder 2019
 */
 
 
@@ -161,6 +161,7 @@ namespace olc
 		static bool DestroyAudio();
 		static void SetUserSynthFunction(std::function<sample(int, double, double)> func);
 		static void SetUserFilterFunction(std::function<sample(int, double, sample)> func);
+		static void SetUserProcessFrameFunction(std::function<void(sample*, int, double)> func);
 
 	public:
 		static int LoadAudioSample(std::string sWavFile, olc::ResourcePack *pack = nullptr);
@@ -168,6 +169,7 @@ namespace olc
 		static void StopSample(int id);
 		static void StopAll();
 		static sample GetMixerOutput(int nChannel, double dGlobalTime, double dTimeStep);
+		static void ProcessFrame(short* pMemory, int nMemoryOffset, int nChannels, double dGlobalTime, double dTimeStep, sample dMaxSample);
 		static double GetTime();
 
 
@@ -214,6 +216,7 @@ namespace olc
 		static std::atomic<double> m_dGlobalTime;
 		static std::function<sample(int, double, double)> funcUserSynth;
 		static std::function<sample(int, double, sample)> funcUserFilter;
+		static std::function<void(sample*, int, double)> funcUserProcessFrame;
 	};
 }
 
@@ -228,14 +231,14 @@ namespace olc
 	SOUND::AudioSample::AudioSample()
 	{	}
 
-	SOUND::AudioSample::AudioSample(std::string sWavFile, olc::ResourcePack *pack)
+	SOUND::AudioSample::AudioSample(std::string sWavFile, olc::ResourcePack* pack)
 	{
 		LoadFromFile(sWavFile, pack);
 	}
 
-	olc::rcode SOUND::AudioSample::LoadFromFile(std::string sWavFile, olc::ResourcePack *pack)
+	olc::rcode SOUND::AudioSample::LoadFromFile(std::string sWavFile, olc::ResourcePack* pack)
 	{
-		auto ReadWave = [&](std::istream &is)
+		auto ReadWave = [&](std::istream& is)
 		{
 			char dump[4];
 			is.read(dump, sizeof(char) * 4); // Read "RIFF"
@@ -299,9 +302,9 @@ namespace olc
 		};
 
 		if (pack != nullptr)
-		{			
+		{
 			olc::ResourceBuffer rb = pack->GetFileBuffer(sWavFile);
-			std::istream is(&rb);			
+			std::istream is(&rb);
 			return ReadWave(is);
 		}
 		else
@@ -332,6 +335,11 @@ namespace olc
 	void SOUND::SetUserFilterFunction(std::function<sample(int, double, sample)> func)
 	{
 		funcUserFilter = func;
+	}
+
+	void SOUND::SetUserProcessFrameFunction(std::function<void(sample*, int, double)> func)
+	{
+		funcUserProcessFrame = func;
 	}
 
 	// Load a 16-bit WAVE file @ 44100Hz ONLY into memory. A sample ID
@@ -428,6 +436,36 @@ namespace olc
 			return dMixerSample;
 	}
 
+	void SOUND::ProcessFrame(short* pMemory, int nMemoryOffset, int nChannels, double dGlobalTime, double dTimeStep, sample dMaxSample)
+	{
+		sample* frame = new sample[nChannels]{ 0.0 };
+		sample* userFrame = new sample[nChannels]{ 0.0 };
+
+		auto clip = [](sample dSample, sample dMax)
+		{
+			if (dSample >= 0.0)
+				return fmin(dSample, dMax);
+			else
+				return fmax(dSample, -dMax);
+		};
+
+		// process internal audio per channel
+		for (int i = 0; i < nChannels; i++)
+			frame[i] = GetMixerOutput(i, dGlobalTime, dTimeStep);
+
+		// run user frame process func (if any)
+		if (funcUserProcessFrame != nullptr)
+			funcUserProcessFrame(userFrame, nChannels, dGlobalTime);
+
+		// sum internal and user audio
+		for (int i = 0; i < nChannels; i++)
+			pMemory[nMemoryOffset + i] = (short)(clip(frame[i] + userFrame[i], 1.0) * dMaxSample);
+
+		// cleanup
+		delete[] frame;
+		delete[] userFrame;
+	}
+
 	double olc::SOUND::GetTime()
 	{
 		return m_dGlobalTime;
@@ -439,6 +477,7 @@ namespace olc
 	std::list<SOUND::sCurrentlyPlayingSample> SOUND::listActiveSamples;
 	std::function<sample(int, double, double)> SOUND::funcUserSynth = nullptr;
 	std::function<sample(int, double, sample)> SOUND::funcUserFilter = nullptr;
+	std::function<void(sample* sFrame, int nChannels, double dGlobalTime)> SOUND::funcUserProcessFrame = nullptr;
 }
 
 // Implementation, Windows-specific
@@ -574,14 +613,10 @@ namespace olc
 			double dElapsedTime = elapsedTime.count();
 
 			for (unsigned int n = 0; n < m_nBlockSamples; n += m_nChannels)
-			{
-				// User Process
-				for (unsigned int c = 0; c < m_nChannels; c++)
-				{
-					nNewSample = (short)(clip(GetMixerOutput(c, m_dGlobalTime + dTimeStep * (double)n, dTimeStep), 1.0) * dMaxSample);
-					m_pBlockMemory[nCurrentBlock + n + c] = nNewSample;
-					nPreviousSample = nNewSample;
-				}				
+			{	
+				// multi-channel user process
+				ProcessFrame(m_pBlockMemory, nCurrentBlock + n, m_nChannels, m_dGlobalTime + dTimeStep * (double)n, dTimeStep, dMaxSample);
+				nPreviousSample = m_pBlockMemory[nCurrentBlock + n]; // set prev sample to output of 1st channel (TODO - reassess)
 			}
 
 			m_dGlobalTime = m_dGlobalTime + dTimeStep * (double)m_nBlockSamples;
@@ -877,7 +912,7 @@ namespace olc
 	}
 
 	std::queue<ALuint> SOUND::m_qAvailableBuffers;
-	ALuint *SOUND::m_pBuffers = nullptr;
+	ALuint *SOUND::m_pBuffers = nullptr; 
 	ALuint SOUND::m_nSource = 0;
 	ALCdevice *SOUND::m_pDevice = nullptr;
 	ALCcontext *SOUND::m_pContext = nullptr;
