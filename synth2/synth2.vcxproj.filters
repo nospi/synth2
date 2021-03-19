@@ -25,6 +25,9 @@
     <Filter Include="Text Files">
       <UniqueIdentifier>{1c8b9758-6ab0-459c-a65c-ae5964b693d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\pge">
+      <UniqueIdentifier>{05ad03ac-ced8-4ec7-831b-d1e401794201}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -130,6 +133,12 @@
     </ClInclude>
     <ClInclude Include="src\keyboard.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\olcPGEX_Sound.h">
+      <Filter>Header Files\pge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\olcPixelGameEngine.h">
+      <Filter>Header Files\pge</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -133,6 +133,8 @@
     <ClInclude Include="..\libs\imgui\imstb_truetype.h" />
     <ClInclude Include="..\libs\imgui_filedialog\ImGuiFileDialog.h" />
     <ClInclude Include="..\libs\imgui_filedialog\ImGuiFileDialogConfig.h" />
+    <ClInclude Include="..\libs\olcPGEX_Sound.h" />
+    <ClInclude Include="..\libs\olcPixelGameEngine.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="src\gui.h" />
     <ClInclude Include="src\instrument.h" />
