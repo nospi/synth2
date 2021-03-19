@@ -1,0 +1,91 @@
+{
+    "comp": {
+        "attack": 115.08999633789063,
+        "autoMakeupGain": true,
+        "enabled": true,
+        "makeupGain": 4.1550436512577855,
+        "ratio": 0.27322403730846795,
+        "release": 60.09000015258789,
+        "threshold": -19.920000076293945
+    },
+    "env": {
+        "attack": 0.049310003715390405,
+        "decay": 0.06592000129997722,
+        "release": 0.019000000902451575,
+        "sustain": 0.7799999825656414
+    },
+    "filter": [
+        {
+            "cutoff": 0.11689478590915534,
+            "enabled": true,
+            "order": 2,
+            "resonance": 0.0,
+            "type": 1
+        },
+        {
+            "cutoff": 0.2012045378047052,
+            "enabled": true,
+            "order": 3,
+            "resonance": 0.5543000030517579,
+            "type": 0
+        }
+    ],
+    "fx": [
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        },
+        {
+            "params": null,
+            "unit": "None"
+        }
+    ],
+    "lfo": {
+        "amplitude": 1.0,
+        "centOffset": 0.0,
+        "enabled": false,
+        "func": 0,
+        "harmonics": 1,
+        "noteOffset": 0.0,
+        "phase": 0.0
+    },
+    "master_dB": 0.0,
+    "osc": [
+        {
+            "amplitude": 0.2779713304383395,
+            "centOffset": 0.0,
+            "enabled": true,
+            "func": 2,
+            "harmonics": 13,
+            "noteOffset": 0.0,
+            "phase": -0.23999999463558197
+        },
+        {
+            "amplitude": 1.0,
+            "centOffset": 6.0,
+            "enabled": true,
+            "func": 1,
+            "harmonics": 4,
+            "noteOffset": -12.0,
+            "phase": 0.0
+        },
+        {
+            "amplitude": 0.5929253271840286,
+            "centOffset": -7.0,
+            "enabled": true,
+            "func": 3,
+            "harmonics": 10,
+            "noteOffset": 12.0,
+            "phase": 0.0
+        }
+    ],
+    "title": "Accordion"
+}
